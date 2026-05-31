@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,8 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPos;
     [SerializeField] private float lineChangeSpeed = 30f;
     [SerializeField] private float jumpPower = 20f;
-    [SerializeField] private float jumpGravity = -40f;
-    public const float realGravity = 9.8f;
+    [SerializeField] private float Gravity = -40f;
     [SerializeField] private bool IsFlying = false;
     [SerializeField] private bool IsDown = false;
     [SerializeField] private float secToDown = 2;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Physics.gravity = new Vector3(0,jumpGravity,0);
+        Physics.gravity = new Vector3(0,Gravity,0);
         targetPos = transform.position;
         rb = GetComponent<Rigidbody>();
     }
@@ -53,6 +53,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) && !IsDown && !IsFlying) 
         {
             coroutineDown = StartCoroutine(Down());
+        }
+        else if(Input.GetKeyDown(KeyCode.S) && IsFlying)
+        {
+            MoveDown();
+            Debug.Log("Летим вниз");
         }
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime);
@@ -93,6 +98,12 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(secToDown);
         IsDown = false;
     }
+
+    void MoveDown()
+    {
+        rb.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
+    }
+
 
     void Jump()
     {
