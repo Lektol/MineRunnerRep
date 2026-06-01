@@ -362,13 +362,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12278779, y: 0.6963643, z: -0.12278779, w: 0.6963643}
-  m_LocalPosition: {x: -12.42, y: 7.52, z: 0}
+  m_LocalRotation: {x: 0.15304591, y: 0.6903456, z: -0.15304591, w: 0.6903456}
+  m_LocalPosition: {x: -12.42, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 20, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 90, z: 0}
 --- !u!1 &1279007834
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,10 +404,9 @@ MonoBehaviour:
   - {fileID: 5406795157332630854, guid: e49c77a9525b2824fba1d5dc8fbab159, type: 3}
   - {fileID: 5406795157332630854, guid: 31d0c4afc152d954199018882c1f50fd, type: 3}
   - {fileID: 5406795157332630854, guid: 067448a35964b8049b82d171cc650ced, type: 3}
-  - {fileID: 5406795157332630854, guid: cea768c004720d44881a2bdfefb09ea0, type: 3}
-  - {fileID: 5406795157332630854, guid: 30f38fc124efc2a489b817db7a899d8c, type: 3}
-  - {fileID: 5406795157332630854, guid: c83ae123799de084ebaa46955ee81b67, type: 3}
-  - {fileID: 5406795157332630854, guid: c71f20b445f22274f89eb93901fb03ad, type: 3}
+  - {fileID: 5406795157332630854, guid: d379407cf25910e4c8010d7f720861ff, type: 3}
+  - {fileID: 5406795157332630854, guid: d0d555543c19bb54db4bb7e925211d74, type: 3}
+  - {fileID: 5406795157332630854, guid: 037e1148213a94d47a07f53c54f8481a, type: 3}
   RoadPrefabsLevel2: []
   secToMedium: 100
   RoadPrefabsLevel3: []
@@ -529,7 +528,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9, y: 5.12, z: 4}
+  m_Size: {x: 7.5, y: 5.12, z: 4}
   m_Center: {x: -0.04, y: -1.2, z: 0}
 --- !u!4 &21811066447965356
 Transform:
