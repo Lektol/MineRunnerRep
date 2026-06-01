@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CoinsSpawner : MonoBehaviour
 {
-    [SerializeField] private Coin[] Coins;
+    [SerializeField] private GameObject CoinsParent;
     [Range(0f,1f)]
     [SerializeField] private float chanceToSpawn = 0.5f;
 
@@ -14,10 +14,7 @@ public class CoinsSpawner : MonoBehaviour
         float chance = UnityEngine.Random.Range(0f, 1f);
         if(chanceToSpawn >= chance)
         {
-            foreach(var coin in Coins)
-            {
-                coin.gameObject.SetActive(true);
-            }
+            CoinsParent.SetActive(true);
         }
     }
 }
