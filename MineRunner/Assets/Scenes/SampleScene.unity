@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 1784173163}
   m_Layer: 0
   m_Name: Trolley
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineChangeSpeed: 30
   jumpPower: 20
-  jumpGravity: -40
+  Gravity: -40
   IsFlying: 0
   IsDown: 0
   secToDown: 2
