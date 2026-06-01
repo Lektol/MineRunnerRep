@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lineChangeSpeed = 30f;
     [SerializeField] private float jumpPower = 20f;
     [SerializeField] private float Gravity = -40f;
-    [SerializeField] private bool IsFlying = false;
-    [SerializeField] private bool IsDown = false;
+    private bool IsFlying = false;
+    private bool IsDown = false;
+    private bool IsWheelsRotating = false;
     [SerializeField] private float secToDown = 2;
+    [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
     private Coroutine coroutineDown;
 
@@ -26,11 +28,13 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnLooseGame += SetStartPosAndStats;
+        EventManager.OnStartGame += WheelRotate;
     }
 
     void OnDisable()
     {
         EventManager.OnLooseGame -= SetStartPosAndStats;
+        EventManager.OnStartGame -= WheelRotate;
     }
 
     void Update()
@@ -61,6 +65,15 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime);
+
+        if (IsWheelsRotating)
+        {
+            foreach (var wheel in Wheels)
+            {
+                wheel.Rotate(0, 0 , RoadGenerator.Instance.maxSpeed * -10 * Time.deltaTime);
+                if(wheel.rotation.z <= -360) wheel.rotation = Quaternion.identity;;
+            }
+        }
     }
 
     void OnCollisionStay(Collision collision)
@@ -115,9 +128,15 @@ public class PlayerController : MonoBehaviour
         IsDown = false;
     }
 
+    void WheelRotate()
+    {
+        IsWheelsRotating = true;
+    }
+
     void SetStartPosAndStats()
     {
         transform.position = new Vector3(0,0,0);
+        IsWheelsRotating = false;
         targetPos = transform.position;
         currentLine = 2;
         StopAllCoroutines();

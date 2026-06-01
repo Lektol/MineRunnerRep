@@ -18,7 +18,7 @@ public class RoadGenerator : MonoBehaviour
     }
     public LevelDifficulty levelDifficulty = LevelDifficulty.Easy;
     private List<GameObject> Roads = new List<GameObject>();
-    [SerializeField] private float maxSpeed = 10;
+    public float maxSpeed = 10;
     private float currentSpeed = 0;
     [SerializeField] private int maxRoadCount;
 
@@ -36,7 +36,7 @@ public class RoadGenerator : MonoBehaviour
     void Start()
     {
         ResetLevel();
-        StartLevel();
+        EventManager.OnStartGame?.Invoke();
     }
 
     void OnEnable()
