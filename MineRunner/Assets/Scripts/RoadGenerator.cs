@@ -36,7 +36,7 @@ public class RoadGenerator : MonoBehaviour
     void Start()
     {
         ResetLevel();
-        EventManager.OnStartGame?.Invoke();
+        EventManager.OnStartGameInvoke();
     }
 
     void OnEnable()

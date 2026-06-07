@@ -96,12 +96,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Barrier"))
         {
-            EventManager.OnLooseGame?.Invoke();
+            EventManager.OnLooseGameInvoke();
         }
 
         if (other.gameObject.CompareTag("BarrierDown") && !IsDown)
         {
-            EventManager.OnLooseGame?.Invoke();
+            EventManager.OnLooseGameInvoke();
         }
     }
 

@@ -6,6 +6,16 @@ using UnityEngine.Events;
 
 public class EventManager
 {
-    public static UnityAction OnStartGame; 
-    public static UnityAction OnLooseGame; 
+    public static event Action OnStartGame; 
+    public static event Action OnLooseGame; 
+
+    public static void OnStartGameInvoke()
+    {
+        OnStartGame?.Invoke();
+    }
+
+    public static void OnLooseGameInvoke()
+    {
+        OnLooseGame?.Invoke();
+    }
 }
