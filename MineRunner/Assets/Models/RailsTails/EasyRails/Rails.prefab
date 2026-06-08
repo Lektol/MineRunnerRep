@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d47e08fffcea14e873c9399c5d14bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinsParent: {fileID: 474716067921624702}
+  CrystalParent: {fileID: 474716067921624702}
   chanceToSpawn: 0.3
 --- !u!1001 &16177570040732703
 PrefabInstance:

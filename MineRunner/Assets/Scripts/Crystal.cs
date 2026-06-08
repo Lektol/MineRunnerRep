@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Crystal : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("Player"))
         {
+            EventManager.OnGetCrystalInvoke();
             Destroy(gameObject);
         }
     }

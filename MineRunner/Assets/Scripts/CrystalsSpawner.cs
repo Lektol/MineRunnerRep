@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinsSpawner : MonoBehaviour
+public class CrystalsSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject CoinsParent;
+    [SerializeField] private GameObject CrystalParent;
     [Range(0f,1f)]
     [SerializeField] private float chanceToSpawn = 0.5f;
 
@@ -14,7 +14,7 @@ public class CoinsSpawner : MonoBehaviour
         float chance = UnityEngine.Random.Range(0f, 1f);
         if(chanceToSpawn >= chance)
         {
-            CoinsParent.SetActive(true);
+            CrystalParent.SetActive(true);
         }
     }
 }

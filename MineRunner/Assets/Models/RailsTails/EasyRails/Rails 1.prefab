@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d47e08fffcea14e873c9399c5d14bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinsParent: {fileID: 8001420600731542851}
+  CrystalParent: {fileID: 8001420600731542851}
   chanceToSpawn: 0.3
 --- !u!1 &8001420600731542851
 GameObject:
@@ -68,7 +68,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7502940165649628073
 Transform:
   m_ObjectHideFlags: 0

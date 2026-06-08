@@ -50,7 +50,7 @@ public class MobileController : MonoBehaviour, IControllable
             touchStartPos = Input.mousePosition;
             isTouching = true;
         }
-        
+
         if (Input.GetMouseButtonUp(0) && isTouching)
         {
             CheckSwipe(Input.mousePosition);
