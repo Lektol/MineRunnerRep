@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
     private Coroutine coroutineDown;
+    private IControllable Controllable;
+    public bool IsPc = true;
 
     void Start()
     {
         Physics.gravity = new Vector3(0,Gravity,0);
         targetPos = transform.position;
         rb = GetComponent<Rigidbody>();
+        Controllable = IsPc ? gameObject.AddComponent<PcController>() : gameObject.AddComponent<MobileController>();
     }
 
     void OnEnable()
@@ -40,25 +43,25 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         targetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-        if (Input.GetKeyDown(KeyCode.A) && currentLine > 1)
+        if (Controllable.IsLeft() && currentLine > 1)
         {
             targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z += 9);
             currentLine--;
         }
-        if (Input.GetKeyDown(KeyCode.D) && currentLine < 3)
+        if (Controllable.IsRight() && currentLine < 3)
         {
             targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z -= 9);
             currentLine++;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && !IsFlying)  //&& transform.position.z % 9 == 0
+        if (Controllable.IsUp() && !IsFlying)  //&& transform.position.z % 9 == 0
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.S) && !IsDown && !IsFlying) 
+        if (Controllable.IsDown() && !IsDown && !IsFlying) 
         {
             coroutineDown = StartCoroutine(Down());
         }
-        else if(Input.GetKeyDown(KeyCode.S) && IsFlying)
+        else if(Controllable.IsDown() && IsFlying)
         {
             MoveDown();
             Debug.Log("Летим вниз");
