@@ -4,20 +4,27 @@ using UnityEngine;
 public class CrystalCountUpdater : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI CrystalCount;
+    private PlayerStats playerStatsInstance;
 
     void Start()
     {
-        ChangeCrystalCountText(PlayerStats.Instance.Crystals);
+        playerStatsInstance = PlayerStats.Instance;
+        ChangeCrystalCountText(playerStatsInstance.Crystals);
+        OnEnable(); //так как не факт, что Awake в PlayerStats вызовется раньше нашего OnEnable
     }
 
     void OnEnable()
     {
-        PlayerStats.Instance.OnCrystalsChanged += ChangeCrystalCountText;
+        if (playerStatsInstance != null)
+        {
+            playerStatsInstance.OnCrystalsChanged -= ChangeCrystalCountText;
+            playerStatsInstance.OnCrystalsChanged += ChangeCrystalCountText;
+        }
     }
 
     void OnDisable()
     {
-        PlayerStats.Instance.OnCrystalsChanged -= ChangeCrystalCountText;
+        playerStatsInstance.OnCrystalsChanged -= ChangeCrystalCountText;
     }
 
     void ChangeCrystalCountText(int count) => CrystalCount.text = "" + count;
