@@ -9,35 +9,54 @@ public class PlayerController : MonoBehaviour
     private Vector3 targetPos;
     [SerializeField] private float lineChangeSpeed = 30f;
     [SerializeField] private float jumpPower = 20f;
+    [SerializeField] private float jumpDeadPower = 25f;
     [SerializeField] private float Gravity = -40f;
     private bool IsFlying = false;
-    private bool IsDown = false;
+    private bool isDown = false;
+    private bool IsDown
+    {
+        get { return isDown; }
+        set
+        {
+            isDown = value;
+            animator.SetBool("IsDown", value);
+        }
+    }
     private bool IsWheelsRotating = false;
+    private bool IsDead = false;
     [SerializeField] private float secToDown = 2;
     [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
+    private Animator animator;
     private Coroutine coroutineDown;
     private IControllable Controllable;
     public bool IsPc = true;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
         Physics.gravity = new Vector3(0,Gravity,0);
         targetPos = transform.position;
-        rb = GetComponent<Rigidbody>();
         Controllable = IsPc ? gameObject.AddComponent<PcController>() : gameObject.AddComponent<MobileController>();
     }
 
     void OnEnable()
     {
-        EventManager.OnLooseGame += SetStartPosAndStats;
-        EventManager.OnStartGame += WheelRotate;
+        //EventManager.OnLooseGame += SetStartPosAndStats;
+        EventManager.OnLooseGame += Dead;
+        EventManager.OnStartGame += StartPlayer;
     }
 
     void OnDisable()
     {
-        EventManager.OnLooseGame -= SetStartPosAndStats;
-        EventManager.OnStartGame -= WheelRotate;
+        //EventManager.OnLooseGame -= SetStartPosAndStats;
+        EventManager.OnLooseGame -= Dead;
+        EventManager.OnStartGame -= StartPlayer;
     }
 
     void Update()
@@ -64,10 +83,12 @@ public class PlayerController : MonoBehaviour
         else if(Controllable.IsDown() && IsFlying)
         {
             MoveDown();
-            Debug.Log("Летим вниз");
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime);
+        if(IsDead == false)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime);   
+        }
 
         if (IsWheelsRotating)
         {
@@ -131,13 +152,30 @@ public class PlayerController : MonoBehaviour
         IsDown = false;
     }
 
-    void WheelRotate()
+    void StartPlayer()
     {
         IsWheelsRotating = true;
+        animator.SetTrigger("StartGame");
+    }
+
+    void Dead()
+    {
+        IsDead = true;
+        float z = (currentLine <= 2) ? 1f : -1f;
+        rb.AddForce(new Vector3(-0.5f, 1, z) * jumpDeadPower, ForceMode.Impulse);
+        StartCoroutine(AfterDead());
+    }
+
+    IEnumerator AfterDead()
+    {
+        yield return new WaitForSeconds(5);
+        SetStartPosAndStats();
+        EventManager.OnRestartGameInvoke();
     }
 
     void SetStartPosAndStats()
     {
+        IsDead = false;
         transform.position = new Vector3(0,0,0);
         IsWheelsRotating = false;
         targetPos = transform.position;

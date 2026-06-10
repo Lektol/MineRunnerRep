@@ -4,6 +4,7 @@ public class EventManager
 {
     public static event Action OnStartGame; 
     public static event Action OnLooseGame; 
+    public static event Action OnRestartGame;
     public static event Action OnGetCrystal;
 
     public static void OnStartGameInvoke()
@@ -14,6 +15,11 @@ public class EventManager
     public static void OnLooseGameInvoke()
     {
         OnLooseGame?.Invoke();
+    }
+
+    public static void OnRestartGameInvoke()
+    {
+        OnRestartGame?.Invoke();
     }
 
     public static void OnGetCrystalInvoke()

@@ -42,13 +42,15 @@ public class RoadGenerator : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnStartGame += StartLevel;
-        EventManager.OnLooseGame += ResetLevel;
+        EventManager.OnLooseGame += StopLevel;
+        EventManager.OnRestartGame += ResetLevel;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= StartLevel;
-        EventManager.OnLooseGame -= ResetLevel;
+        EventManager.OnLooseGame -= StopLevel;
+        EventManager.OnRestartGame -= ResetLevel;
     }
 
     void Update()
@@ -113,6 +115,12 @@ public class RoadGenerator : MonoBehaviour
             }
         }
         levelDifficulty = LevelDifficulty.Easy;
+        StopAllCoroutines();
+    }
+
+    void StopLevel()
+    {
+        currentSpeed = 0;
         StopAllCoroutines();
     }
 
