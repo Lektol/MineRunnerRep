@@ -61,34 +61,38 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        targetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
-        if (Controllable.IsLeft() && currentLine > 1)
-        {
-            targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z += 9);
-            currentLine--;
-        }
-        if (Controllable.IsRight() && currentLine < 3)
-        {
-            targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z -= 9);
-            currentLine++;
-        }
-        if (Controllable.IsUp() && !IsFlying)  //&& transform.position.z % 9 == 0
-        {
-            Jump();
-        }
-        if (Controllable.IsDown() && !IsDown && !IsFlying) 
-        {
-            coroutineDown = StartCoroutine(Down());
-        }
-        else if(Controllable.IsDown() && IsFlying)
-        {
-            MoveDown();
-        }
-
         if(IsDead == false)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime);   
+            targetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
+            if (Controllable.IsLeft() && currentLine > 1)
+            {
+                targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z += 9);
+                currentLine--;
+            }
+            if (Controllable.IsRight() && currentLine < 3)
+            {
+                targetPos = new Vector3(transform.position.x, transform.position.y, targetPos.z -= 9);
+                currentLine++;
+            }
+            if (Controllable.IsUp() && !IsFlying)  //&& transform.position.z % 9 == 0
+            {
+                Jump();
+            }
+            if (Controllable.IsDown() && !IsDown && !IsFlying) 
+            {
+                coroutineDown = StartCoroutine(Down());
+            }
+            else if(Controllable.IsDown() && IsFlying)
+            {
+                MoveDown();
+            }
         }
+        else
+        {
+            targetPos = transform.position;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, lineChangeSpeed * Time.deltaTime); 
 
         if (IsWheelsRotating)
         {
@@ -176,11 +180,12 @@ public class PlayerController : MonoBehaviour
     void SetStartPosAndStats()
     {
         IsDead = false;
-        transform.position = new Vector3(0,0,0);
         IsWheelsRotating = false;
+        IsDown = false;
+        transform.position = new Vector3(0,0,0);
         targetPos = transform.position;
         currentLine = 2;
         StopAllCoroutines();
-        IsDown = false;
+        animator.SetTrigger("RestartGame");
     }
 }
