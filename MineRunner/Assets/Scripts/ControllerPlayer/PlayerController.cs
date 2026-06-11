@@ -167,9 +167,10 @@ public class PlayerController : MonoBehaviour
     void Dead()
     {
         CanControll = false;
+        animator.SetTrigger("Dead");
         rb.constraints &= ~RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY;
         float z = (currentLine <= 2) ? 1f : -1f;
-        rb.AddForce(new Vector3(-0.4f, 1, z) * jumpDeadPower, ForceMode.Impulse);
+        rb.AddForce(new Vector3(-0.35f, 1, z) * jumpDeadPower, ForceMode.Impulse);
         StartCoroutine(AfterDead());
     }
 

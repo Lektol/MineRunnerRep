@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineChangeSpeed: 30
   jumpPower: 20
-  jumpDeadPower: 25
+  jumpDeadPower: 30
   Gravity: -40
   timeDead: 3
   secToDown: 2
