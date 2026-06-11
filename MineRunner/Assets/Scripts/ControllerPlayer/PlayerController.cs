@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     private bool IsWheelsRotating = false;
-    private bool IsDead = false;
+    private bool CanControll = false;
     [SerializeField] private float secToDown = 2;
     [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(IsDead == false)
+        if(CanControll == true)
         {
             targetPos = new Vector3(targetPos.x, transform.position.y, targetPos.z);
             if (Controllable.IsLeft() && currentLine > 1)
@@ -160,14 +160,16 @@ public class PlayerController : MonoBehaviour
     void StartPlayer()
     {
         IsWheelsRotating = true;
+        CanControll = true;
         animator.SetTrigger("StartGame");
     }
 
     void Dead()
     {
-        IsDead = true;
+        CanControll = false;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY;
         float z = (currentLine <= 2) ? 1f : -1f;
-        rb.AddForce(new Vector3(-0.5f, 1, z) * jumpDeadPower, ForceMode.Impulse);
+        rb.AddForce(new Vector3(-0.4f, 1, z) * jumpDeadPower, ForceMode.Impulse);
         StartCoroutine(AfterDead());
     }
 
@@ -180,10 +182,11 @@ public class PlayerController : MonoBehaviour
 
     void SetStartPosAndStats()
     {
-        IsDead = false;
         IsWheelsRotating = false;
         IsDown = false;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         transform.position = new Vector3(0,0,0);
+        transform.rotation = Quaternion.identity;
         targetPos = transform.position;
         currentLine = 2;
         StopAllCoroutines();
