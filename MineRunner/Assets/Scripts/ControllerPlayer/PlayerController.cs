@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 20f;
     [SerializeField] private float jumpDeadPower = 25f;
     [SerializeField] private float Gravity = -40f;
+    [SerializeField] private float timeDead = 3f;
     private bool IsFlying = false;
     private bool isDown = false;
     private bool IsDown
@@ -172,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator AfterDead()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(timeDead);
         SetStartPosAndStats();
         EventManager.OnRestartGameInvoke();
     }

@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SuperCheats : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Ваш метод, который хотите вызывать
+    public void InvokeStartIvent()
     {
-        
+        EventManager.OnStartGameInvoke();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Этот код добавит кнопку в инспекторе
+    #if UNITY_EDITOR
+    [CustomEditor(typeof(SuperCheats))]
+    public class MyScriptEditor : Editor
     {
-        
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector(); // Рисуем стандартные поля
+            
+            SuperCheats script = (SuperCheats)target;
+            
+            if (GUILayout.Button("InvokeStart")) // Кнопка
+            {
+                script.InvokeStartIvent(); // Вызов метода
+            }
+        }
     }
+    #endif
 }
