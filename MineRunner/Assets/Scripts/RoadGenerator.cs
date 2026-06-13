@@ -21,6 +21,7 @@ public class RoadGenerator : MonoBehaviour
     public float maxSpeed = 10;
     private float currentSpeed = 0;
     [SerializeField] private int maxRoadCount;
+    [SerializeField] private Vector3 startPose;
 
     void Awake()
     {
@@ -70,7 +71,7 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
-    void CreateNewRoad(bool firstRoad = false)
+    void CreateNewRoad(bool isFirstRoad = false)
     {
         GameObject[] RoadPrefabs = null;
         switch (levelDifficulty)
@@ -85,11 +86,9 @@ public class RoadGenerator : MonoBehaviour
                 RoadPrefabs = RoadPrefabsLevel3;
                 break;
         }
-        Vector3 pos = Vector3.zero;
-        if(Roads.Count > 0) { pos = Roads[Roads.Count-1].transform.position + new Vector3(56,0,0); }
-        int index;
-        if(firstRoad) index = 0;
-        else index = Random.Range(0, RoadPrefabs.Length);
+        Vector3 pos = Roads.Count > 0 ? Roads[Roads.Count-1].transform.position + new Vector3(56,0,0) : startPose;
+        int index = isFirstRoad ? 0 : Random.Range(0, RoadPrefabs.Length);
+        
         GameObject newRoad = Instantiate(RoadPrefabs[index], pos, Quaternion.identity);
         newRoad.transform.SetParent(transform);
         Roads.Add(newRoad);

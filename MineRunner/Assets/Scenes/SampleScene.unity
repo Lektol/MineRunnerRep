@@ -508,13 +508,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761667559}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1710646, y: 0.6861027, z: -0.1710646, w: 0.6861027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.3, y: 10.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1733728885}
-  m_LocalEulerAnglesHint: {x: 28, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &937794273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,11 +765,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ecffd6648d43f4890a238347449917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPos: {fileID: 0}
+  MenuPos: {fileID: 1978189513}
   MainPos: {fileID: 761667560}
-  TargetPos: {fileID: 0}
+  MenuRotation: {x: 10, y: -19, z: 0}
   MainRotation: {x: 28, y: 90, z: 0}
-  cameraSpeed: 5
+  cameraSpeed: 150
 --- !u!1 &1030536462
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +847,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CavesPrefabs:
   - {fileID: 4347433068926294552, guid: c7c24d0c05bd16144b1e371018239fef, type: 3}
-  countCaves: 6
+  countCaves: 7
+  startPose: {x: -72, y: -50, z: 0}
   speedDevider: 3
 --- !u!4 &1057627217
 Transform:
@@ -1074,7 +1075,8 @@ MonoBehaviour:
   secToHard: 100
   levelDifficulty: 1
   maxSpeed: 35
-  maxRoadCount: 7
+  maxRoadCount: 8
+  startPose: {x: -56, y: 0, z: 0}
 --- !u!4 &1279007836
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,7 +1452,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 48
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1784173163
 BoxCollider:
@@ -1620,7 +1622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1978189513}
   m_Layer: 0
-  m_Name: MainPos (1)
+  m_Name: 'MenuPos '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1634,13 +1636,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978189512}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1710646, y: 0.6861027, z: -0.1710646, w: 0.6861027}
-  m_LocalPosition: {x: 3.93, y: 1, z: -8.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.3, y: 3.9, z: -5.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1733728885}
-  m_LocalEulerAnglesHint: {x: 28, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2105654440
 GameObject:
   m_ObjectHideFlags: 0

@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
     {
         CanControll = false;
         animator.SetTrigger("Dead");
-        rb.constraints &= ~RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY;
+        rb.constraints &= ~RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY & ~RigidbodyConstraints.FreezeRotationZ;
         float z = (currentLine <= 2) ? 1f : -1f;
         rb.AddForce(new Vector3(-0.35f, 1, z) * jumpDeadPower, ForceMode.Impulse);
         StartCoroutine(AfterDead());
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     {
         IsWheelsRotating = false;
         IsDown = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         transform.position = new Vector3(0,0,0);
         transform.rotation = Quaternion.identity;
         targetPos = transform.position;
