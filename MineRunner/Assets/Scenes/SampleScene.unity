@@ -769,7 +769,8 @@ MonoBehaviour:
   MainPos: {fileID: 761667560}
   MenuRotation: {x: 10, y: -19, z: 0}
   MainRotation: {x: 28, y: 90, z: 0}
-  cameraSpeed: 150
+  smoothSpeed: 4
+  cameraSmoothSpeed: 4
 --- !u!1 &1030536462
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform MenuPos;
     [SerializeField] private Transform MainPos;
     private Vector3 TargetPos;
+    private Vector3 TargetRotate;
     [SerializeField] private Vector3 MenuRotation;
     [SerializeField] private Vector3 MainRotation;
-    [SerializeField] private float cameraSpeed;
+    [SerializeField] private int smoothSpeed;
+    [SerializeField] private float cameraSmoothSpeed;
 
     void Start()
     {
@@ -29,18 +31,21 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, TargetPos, cameraSpeed*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, TargetPos, cameraSmoothSpeed*Time.deltaTime);
+
+        Quaternion targetRotation = Quaternion.Euler(TargetRotate);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothSpeed * Time.deltaTime);
     }
 
     void SetMainPos()
     {
-        transform.eulerAngles = MainRotation;
         TargetPos = MainPos.position; 
+        TargetRotate = MainRotation;
     }
 
     void SetMenuPos()
     {
-        transform.eulerAngles = MenuRotation;
         TargetPos = MenuPos.position; 
+        TargetRotate = MenuRotation;
     }
 }
