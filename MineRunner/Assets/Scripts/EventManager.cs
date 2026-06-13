@@ -3,8 +3,8 @@ using System;
 public class EventManager
 {
     public static event Action OnStartGame; 
-    public static event Action OnLooseGame; 
-    public static event Action OnRestartGame;
+    public static event Action OnLoseGame; 
+    public static event Action OnResetGame;
     public static event Action OnGetCrystal;
 
     public static void OnStartGameInvoke()
@@ -12,14 +12,14 @@ public class EventManager
         OnStartGame?.Invoke();
     }
 
-    public static void OnLooseGameInvoke()
+    public static void OnLoseGameInvoke()
     {
-        OnLooseGame?.Invoke();
+        OnLoseGame?.Invoke();
     }
 
-    public static void OnRestartGameInvoke()
+    public static void OnResetGameInvoke()
     {
-        OnRestartGame?.Invoke();
+        OnResetGame?.Invoke();
     }
 
     public static void OnGetCrystalInvoke()

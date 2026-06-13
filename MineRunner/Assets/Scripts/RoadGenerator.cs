@@ -37,21 +37,20 @@ public class RoadGenerator : MonoBehaviour
     void Start()
     {
         ResetLevel();
-        EventManager.OnStartGameInvoke();
     }
 
     void OnEnable()
     {
         EventManager.OnStartGame += StartLevel;
-        EventManager.OnLooseGame += StopLevel;
-        EventManager.OnRestartGame += ResetLevel;
+        EventManager.OnLoseGame += StopLevel;
+        EventManager.OnResetGame += ResetLevel;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= StartLevel;
-        EventManager.OnLooseGame -= StopLevel;
-        EventManager.OnRestartGame -= ResetLevel;
+        EventManager.OnLoseGame -= StopLevel;
+        EventManager.OnResetGame -= ResetLevel;
     }
 
     void Update()
@@ -88,7 +87,7 @@ public class RoadGenerator : MonoBehaviour
         }
         Vector3 pos = Roads.Count > 0 ? Roads[Roads.Count-1].transform.position + new Vector3(56,0,0) : startPose;
         int index = isFirstRoad ? 0 : Random.Range(0, RoadPrefabs.Length);
-        
+
         GameObject newRoad = Instantiate(RoadPrefabs[index], pos, Quaternion.identity);
         newRoad.transform.SetParent(transform);
         Roads.Add(newRoad);

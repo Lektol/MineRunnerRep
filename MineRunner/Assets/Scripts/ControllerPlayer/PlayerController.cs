@@ -49,14 +49,14 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         //EventManager.OnLooseGame += SetStartPosAndStats;
-        EventManager.OnLooseGame += Dead;
+        EventManager.OnLoseGame += Dead;
         EventManager.OnStartGame += StartPlayer;
     }
 
     void OnDisable()
     {
         //EventManager.OnLooseGame -= SetStartPosAndStats;
-        EventManager.OnLooseGame -= Dead;
+        EventManager.OnLoseGame -= Dead;
         EventManager.OnStartGame -= StartPlayer;
     }
 
@@ -125,12 +125,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Barrier"))
         {
-            EventManager.OnLooseGameInvoke();
+            EventManager.OnLoseGameInvoke();
         }
 
         if (other.gameObject.CompareTag("BarrierDown") && !IsDown)
         {
-            EventManager.OnLooseGameInvoke();
+            EventManager.OnLoseGameInvoke();
         }
     }
 
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDead);
         SetStartPosAndStats();
-        EventManager.OnRestartGameInvoke();
+        EventManager.OnResetGameInvoke();
     }
 
     void SetStartPosAndStats()

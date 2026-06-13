@@ -16,17 +16,18 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        //TargetPos.position = MenuPos.position;
+        TargetPos = MenuPos.position;
+        TargetRotate = MenuRotation;
     } 
     void OnEnable()
     {
-        EventManager.OnRestartGame += SetMenuPos;
+        EventManager.OnResetGame += SetMenuPos;
         EventManager.OnStartGame += SetMainPos;
     }
 
     void OnDisable()
     {
-        EventManager.OnRestartGame -= SetMenuPos;
+        EventManager.OnResetGame -= SetMenuPos;
         EventManager.OnStartGame -= SetMainPos;
     }
     void Update()

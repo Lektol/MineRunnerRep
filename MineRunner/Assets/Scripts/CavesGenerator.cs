@@ -19,13 +19,13 @@ public class CavesGenerator : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnStartGame += ChangeSpeedToMax;
-        EventManager.OnLooseGame += ResetLevel;
+        EventManager.OnLoseGame += ResetLevel;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= ChangeSpeedToMax;
-        EventManager.OnLooseGame -= ResetLevel;
+        EventManager.OnLoseGame -= ResetLevel;
     }
 
     void Update()
