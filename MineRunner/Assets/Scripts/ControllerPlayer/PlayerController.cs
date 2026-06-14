@@ -1,6 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using YG;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         Physics.gravity = new Vector3(0,Gravity,0);
         targetPos = transform.position;
-        Controllable = IsPc ? gameObject.AddComponent<PcController>() : gameObject.AddComponent<MobileController>();
+        Controllable = YG2.envir.isDesktop ? gameObject.AddComponent<PcController>() : gameObject.AddComponent<MobileController>();
     }
 
     void OnEnable()
