@@ -576,7 +576,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -635,6 +635,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &690655173
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4347433068926294552, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_Name
+      value: CaveFace
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -67
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808448632637781762, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0a702f13ce30ab40884881d7c07cb4d, type: 3}
 --- !u!1 &744114396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057627217}
   - component: {fileID: 1057627216}
+  - component: {fileID: 1057627218}
   m_Layer: 0
   m_Name: CavesGenerator
   m_TagString: Untagged
@@ -1144,9 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4f27e86dcae8240a7031798194c6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CavesPrefabs:
-  - {fileID: 4347433068926294552, guid: c7c24d0c05bd16144b1e371018239fef, type: 3}
-  countCaves: 7
   startPose: {x: -72, y: -50, z: 0}
   speedDevider: 3
 --- !u!4 &1057627217
@@ -1164,6 +1219,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057627218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057627215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465363703564f5e4c8e7073ad63144cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4347433068926294552, guid: c7c24d0c05bd16144b1e371018239fef, type: 3}
+  poolSize: 7
 --- !u!1 &1161358537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4389,3 +4458,4 @@ SceneRoots:
   - {fileID: 937794273}
   - {fileID: 1784173161}
   - {fileID: 2105654443}
+  - {fileID: 690655173}
