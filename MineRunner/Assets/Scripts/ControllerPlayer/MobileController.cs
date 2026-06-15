@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class MobileController : MonoBehaviour, IControllable
 {
-    [SerializeField] private float minSwipeDistance = 50f;
+    [SerializeField] private float minSwipeDistance = 30f;
+    [SerializeField] private float minTimeToDoSmth = 0.1f; 
+    private float currentTimeToTouch = 0; 
     
     private Vector2 touchStartPos;
     private bool isTouching = false;
@@ -22,12 +24,21 @@ public class MobileController : MonoBehaviour, IControllable
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            
+            //currentTimeToTouch += 1 * Time.deltaTime;
             switch (touch.phase)
             {
                 case TouchPhase.Began:
                     touchStartPos = touch.position;
                     isTouching = true;
+                    break;
+
+                case TouchPhase.Moved:
+                    if(currentTimeToTouch >= minTimeToDoSmth)
+                    {
+                        CheckSwipe(touch.position);
+                        isTouching = false;
+                        currentTimeToTouch = 0;
+                    }
                     break;
                     
                 case TouchPhase.Ended:
@@ -35,6 +46,7 @@ public class MobileController : MonoBehaviour, IControllable
                     {
                         CheckSwipe(touch.position);
                         isTouching = false;
+                        currentTimeToTouch = 0;
                     }
                     break;
                     
@@ -43,12 +55,20 @@ public class MobileController : MonoBehaviour, IControllable
                     break;
             }
         }
+        if(isTouching) currentTimeToTouch += 1 * Time.deltaTime;
+        Debug.Log(currentTimeToTouch);
         
         #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             touchStartPos = Input.mousePosition;
             isTouching = true;
+        }
+        if(currentTimeToTouch >= minTimeToDoSmth)
+        {
+            CheckSwipe(Input.mousePosition);
+            isTouching = false;
+            currentTimeToTouch = 0;
         }
 
         if (Input.GetMouseButtonUp(0) && isTouching)

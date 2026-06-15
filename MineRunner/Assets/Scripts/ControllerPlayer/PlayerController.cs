@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     }
     private bool IsWheelsRotating = false;
     private bool CanControll = false;
-    [SerializeField] private float secToDown = 2;
+    [SerializeField] private float secToDown = 1;
     [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
     private Animator animator;
@@ -136,7 +136,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator Down()
     {
         IsDown = true;
+        Debug.Log("a");
         yield return new WaitForSeconds(secToDown);
+        Debug.Log("b");
         IsDown = false;
     }
 
