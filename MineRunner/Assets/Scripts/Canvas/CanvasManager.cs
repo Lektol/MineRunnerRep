@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using YG;
 
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject PlayablePanel;
-    [SerializeField] private GameObject MenuPanel;
+    [SerializeField] private GameObject MenuPanel; 
 
     void OnEnable()
     {
