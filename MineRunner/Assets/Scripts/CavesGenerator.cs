@@ -19,13 +19,15 @@ public class CavesGenerator : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnStartGame += ChangeSpeedToMax;
-        EventManager.OnLoseGame += ResetLevel;
+        EventManager.OnResetGame += ResetLevel;
+        EventManager.OnLoseGame += StopLevel;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= ChangeSpeedToMax;
-        EventManager.OnLoseGame -= ResetLevel;
+        EventManager.OnResetGame -= ResetLevel;
+        EventManager.OnLoseGame -= StopLevel;
     }
 
     void Update()
@@ -37,7 +39,7 @@ public class CavesGenerator : MonoBehaviour
             cave.transform.position -= new Vector3(currentSpeed / speedDevider * Time.deltaTime, 0, 0);
         }
 
-        if(Caves[0].transform.position.x < -70)
+        if(Caves[0].transform.position.x < -90)
         {
             Destroy(Caves[0]);
             Caves.RemoveAt(0);
@@ -56,13 +58,18 @@ public class CavesGenerator : MonoBehaviour
 
     void ResetLevel()
     {
-        currentSpeed = 0;
+        //currentSpeed = 0;
         while(Caves.Count > 0)
         {
             Destroy(Caves[0]);
             Caves.RemoveAt(0);
         }
         for(int i = 0; i < countCaves; i++) CreateNewCave();
+    }
+
+    void StopLevel()
+    {
+        currentSpeed = 0;
     }
 
     void ChangeSpeedToMax()
