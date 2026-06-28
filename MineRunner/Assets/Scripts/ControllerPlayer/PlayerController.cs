@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 20f;
     [SerializeField] private float jumpDeadPower = 25f;
     [SerializeField] private float Gravity = -40f;
-    [SerializeField] private float timeDead = 3f;
+    private bool IsInvincible = false;
     private bool IsFlying = false;
     private bool isDown = false;
     private bool IsDown
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool IsWheelsRotating = false;
     private bool CanControll = false;
     [SerializeField] private float secToDown = 1;
+    [SerializeField] private float secToInvincible = 1;
     [SerializeField] private Transform[] Wheels;
     private Rigidbody rb;
     private Animator animator;
@@ -48,16 +49,18 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-        //EventManager.OnLooseGame += SetStartPosAndStats;
         EventManager.OnLoseGame += Dead;
         EventManager.OnStartGame += StartPlayer;
+        EventManager.OnRebirth += StartCoroutineRebirth;
+        EventManager.OnResetGame += SetStartPosAndStats;
     }
 
     void OnDisable()
     {
-        //EventManager.OnLooseGame -= SetStartPosAndStats;
         EventManager.OnLoseGame -= Dead;
         EventManager.OnStartGame -= StartPlayer;
+        EventManager.OnRebirth -= StartCoroutineRebirth;
+        EventManager.OnResetGame -= SetStartPosAndStats;
     }
 
     void Update()
@@ -128,15 +131,37 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Barrier"))
+        if (other.gameObject.CompareTag("Barrier") && IsInvincible == false)
         {
             EventManager.OnLoseGameInvoke();
         }
 
-        if (other.gameObject.CompareTag("BarrierDown") && !IsDown)
+        if (other.gameObject.CompareTag("BarrierDown") && !IsDown && IsInvincible == false)
         {
             EventManager.OnLoseGameInvoke();
         }
+
+        if (other.gameObject.CompareTag("Crystal"))
+        {
+            EventManager.OnGetCrystalInvoke();
+            Destroy(other.gameObject);
+        }
+    }
+
+    void StartCoroutineRebirth()
+    {
+        StartCoroutine(Rebirth());
+    }
+
+    IEnumerator Rebirth()
+    {
+        IsInvincible = true;
+        SetStartPosAndStats();
+        StartPlayer();
+        Debug.Log("dont forget");
+        yield return new WaitForSeconds(secToInvincible);
+        Debug.Log("i am invincible");
+        IsInvincible = false;
     }
 
     IEnumerator Down()
@@ -177,14 +202,7 @@ public class PlayerController : MonoBehaviour
         rb.constraints &= ~RigidbodyConstraints.FreezeRotationX & ~RigidbodyConstraints.FreezeRotationY & ~RigidbodyConstraints.FreezeRotationZ;
         float z = (currentLine <= 2) ? 1f : -1f;
         rb.AddForce(new Vector3(-0.35f, 1, z) * jumpDeadPower, ForceMode.Impulse);
-        StartCoroutine(AfterDead());
-    }
-
-    IEnumerator AfterDead()
-    {
-        yield return new WaitForSeconds(timeDead);
-        SetStartPosAndStats();
-        EventManager.OnResetGameInvoke();
+        //StartCoroutine(AfterDead());
     }
 
     void SetStartPosAndStats()
@@ -192,11 +210,12 @@ public class PlayerController : MonoBehaviour
         IsWheelsRotating = false;
         IsDown = false;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        rb.velocity = new Vector3(0,0,0);
         transform.position = new Vector3(0,0,0);
         transform.rotation = Quaternion.identity;
         targetPos = transform.position;
         currentLine = 2;
-        StopAllCoroutines();
+        //StopAllCoroutines();
         animator.SetTrigger("RestartGame");
     }
 }

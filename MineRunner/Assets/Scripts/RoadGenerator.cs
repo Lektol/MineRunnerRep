@@ -44,6 +44,7 @@ public class RoadGenerator : MonoBehaviour
         EventManager.OnStartGame += StartLevel;
         EventManager.OnLoseGame += StopLevel;
         EventManager.OnResetGame += ResetLevel;
+        EventManager.OnRebirth += StartLevel;
     }
 
     void OnDisable()
@@ -51,6 +52,7 @@ public class RoadGenerator : MonoBehaviour
         EventManager.OnStartGame -= StartLevel;
         EventManager.OnLoseGame -= StopLevel;
         EventManager.OnResetGame -= ResetLevel;
+        EventManager.OnRebirth -= StartLevel;
     }
 
     void Update()

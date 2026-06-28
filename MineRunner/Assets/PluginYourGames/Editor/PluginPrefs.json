@@ -2,7 +2,7 @@
     "stringPrefs": [
         {
             "key": "SelectModuleToggle_YG2",
-            "value": "EnvirData"
+            "value": "EnvirData;InterstitialAdv;RewardedAdv"
         }
     ],
     "intPrefs": [
