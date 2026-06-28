@@ -45,7 +45,6 @@ public class CavesGenerator : MonoBehaviour
             if(cave.transform.position.x < -90)
             {
                 cave.SetActive(false);
-                Debug.Log("Ушёл в отбой");
                 CreateNewCave(); 
             }
         }

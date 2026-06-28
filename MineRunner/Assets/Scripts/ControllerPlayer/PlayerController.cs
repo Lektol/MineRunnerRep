@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsDown", value);
         }
     }
+    private bool RequestToDown = false;
     private bool IsWheelsRotating = false;
     private bool CanControll = false;
     [SerializeField] private float secToDown = 1;
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Coroutine coroutineDown;
     private IControllable Controllable;
-    public bool IsPc = true;
+    //public bool IsPc = true;
 
     void Awake()
     {
@@ -109,6 +110,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Rails"))
         {
             IsFlying = false;
+            if (RequestToDown)
+            {
+                StartCoroutine(Down());
+                RequestToDown = false;
+            }
         }
     }
 
@@ -136,15 +142,14 @@ public class PlayerController : MonoBehaviour
     IEnumerator Down()
     {
         IsDown = true;
-        Debug.Log("a");
         yield return new WaitForSeconds(secToDown);
-        Debug.Log("b");
         IsDown = false;
     }
 
     void MoveDown()
     {
         rb.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
+        RequestToDown = true;
     }
 
 
