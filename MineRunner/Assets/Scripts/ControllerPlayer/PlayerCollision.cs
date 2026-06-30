@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public bool IsInvincible = false;
+    private bool isInvincible = false;
+    public bool IsInvincible
+    {
+        get{ return isInvincible; }
+        set
+        {
+            isInvincible = value;
+            SphereInvincible.SetActive(value);
+        }
+    }
+    
     public bool IsFlying = false;
     private bool isDown = false;
     public bool IsDown
@@ -17,6 +27,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
     public bool RequestToDown = false;
+    [SerializeField] GameObject SphereInvincible;
     private Animator animator;
     private PlayerController playerController;
 
