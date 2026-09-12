@@ -1,11 +1,27 @@
 using UnityEngine.UI;
 using UnityEngine;
 using YG;
+using System;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _playablePanel;
-    [SerializeField] private GameObject _menuPanel; 
+    public enum TypePanel
+    {
+        PlayPanel = 1,
+        MenuPanel = 2,
+        PausePanel = 3
+    }
+
+    [Serializable]
+    public struct Panel
+    {
+        public TypePanel TypePanel;
+        public GameObject ObjPanel;
+    }
+    [SerializeField] private Panel _playablePanel;
+    [SerializeField] private Panel _menuPanel; 
+    [SerializeField] private Panel _pausePanel;
+    private Panel[] _allPanels;
 
     void OnEnable()
     {
@@ -19,20 +35,50 @@ public class CanvasManager : MonoBehaviour
         EventManager.OnResetGame -= SetActiveMenuPanel;
     }
 
+    private void Start()
+    {
+        _allPanels = new[] {_playablePanel, _menuPanel ,_pausePanel};
+    }
+
     public void StartGame()
     {
         EventManager.OnStartGameInvoke();
     }
 
-    void SetActivePlayablePanel()
+    private void SetActivePlayablePanel()
     {
-        _menuPanel.SetActive(false);
-        _playablePanel.SetActive(true);
+        SetActivePanel(TypePanel.PlayPanel);
     }
 
-    void SetActiveMenuPanel()
+    private void SetActiveMenuPanel()
     {
-        _menuPanel.SetActive(true);
-        _playablePanel.SetActive(false);
+        Time.timeScale = 1f; 
+        SetActivePanel(TypePanel.MenuPanel);
+    }
+
+    public void SetActivePausePanel()
+    {
+        SetActivePanel(TypePanel.PausePanel);
+        Time.timeScale = 0f;
+    }
+
+    public void ComebackToPlay()
+    {
+        Time.timeScale = 1f; 
+        SetActivePanel(TypePanel.PlayPanel);
+    }
+
+    public void ExitToMenu()
+    {
+        EventManager.OnResetGameInvoke();
+    }
+
+    private void SetActivePanel(TypePanel panel)
+    {
+        foreach(var Panel in _allPanels)
+        {
+            if(Panel.ObjPanel == null) continue;
+            Panel.ObjPanel.SetActive(Panel.TypePanel==panel);
+        }
     }
 }

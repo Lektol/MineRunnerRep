@@ -40,10 +40,6 @@ public class CavesGenerator : MonoBehaviour
         foreach(GameObject cave in _objectPool.pool)
         {
             cave.transform.position -= new Vector3(_currentSpeed / _speedDevider * Time.deltaTime, 0, 0);
-        }
-
-        foreach(GameObject cave in _objectPool.pool)
-        {
             if(cave.transform.position.x < -90)
             {
                 cave.SetActive(false);
@@ -63,6 +59,7 @@ public class CavesGenerator : MonoBehaviour
 
     void ResetLevel()
     {
+        StopLevel();
         _objectPool.DisableAll();
         for(int i = 0; i < _objectPool.PoolSize(); i++) CreateNewCave();
     }

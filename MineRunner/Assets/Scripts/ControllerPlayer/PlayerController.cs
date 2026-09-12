@@ -23,21 +23,21 @@ public class PlayerController : MonoBehaviour
     private PlayerCollision _playerCollision;
     //public bool IsPc = true;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _playerCollision = GetComponent<PlayerCollision>();
     }
 
-    void Start()
+    private void Start()
     {
         Physics.gravity = new Vector3(0,_gravity,0);
         _targetPos = transform.position;
         _controllable = YG2.envir.isDesktop ? gameObject.AddComponent<PcController>() : gameObject.AddComponent<MobileController>();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         EventManager.OnLoseGame += Dead;
         EventManager.OnStartGame += StartPlayer;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         EventManager.OnResetGame += SetStartPosAndStats;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EventManager.OnLoseGame -= Dead;
         EventManager.OnStartGame -= StartPlayer;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         EventManager.OnResetGame -= SetStartPosAndStats;
     }
 
-    void Update()
+    private void Update()
     {
         if(_canControll == true)
         {
@@ -99,14 +99,14 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    void Rebirth()
+    private void Rebirth()
     {
         SetStartPosAndStats();
         StartPlayer();
         StartCoroutine(Invincible());
     }
 
-    IEnumerator Invincible()
+    private IEnumerator Invincible()
     {
         _playerCollision.IsInvincible = true;
         yield return new WaitForSeconds(_secToInvincible);
@@ -120,14 +120,14 @@ public class PlayerController : MonoBehaviour
         _playerCollision.IsDown = false;
     }
 
-    void MoveDown()
+    private void MoveDown()
     {
         _rb.AddForce(Vector3.down * _jumpPower, ForceMode.Impulse);
         _playerCollision.RequestToDown = true;
     }
 
 
-    void Jump()
+    private void Jump()
     {
         _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
         if(_coroutineDown != null)
@@ -137,14 +137,14 @@ public class PlayerController : MonoBehaviour
         _playerCollision.IsDown = false;
     }
 
-    void StartPlayer()
+    private void StartPlayer()
     {
         _isWheelsRotating = true;
         _canControll = true;
         _animator.SetTrigger("StartGame");
     }
 
-    void Dead()
+    private void Dead()
     {
         _canControll = false;
         _animator.SetTrigger("Dead");
@@ -154,9 +154,10 @@ public class PlayerController : MonoBehaviour
         //StartCoroutine(AfterDead());
     }
 
-    void SetStartPosAndStats()
+    private void SetStartPosAndStats()
     {
         _playerCollision.SetStartStats();
+        _canControll = false;
         _isWheelsRotating = false;
         _rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         _rb.velocity = new Vector3(0,0,0);

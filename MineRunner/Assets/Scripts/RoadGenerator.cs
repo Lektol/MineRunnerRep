@@ -97,7 +97,7 @@ public class RoadGenerator : MonoBehaviour
 
     void ResetLevel()
     {
-        _currentSpeed = 0;
+        StopLevel();
         while(_roads.Count > 0)
         {
             Destroy(_roads[0]);
@@ -115,7 +115,6 @@ public class RoadGenerator : MonoBehaviour
             }
         }
         levelDifficulty = LevelDifficulty.Easy;
-        StopAllCoroutines();
     }
 
     void StopLevel()
