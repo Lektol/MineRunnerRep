@@ -5,11 +5,11 @@ using UnityEngine;
 public class RoadGenerator : MonoBehaviour
 {
     public static RoadGenerator Instance { get; private set;}
-    [SerializeField] private GameObject[] RoadPrefabsLevel1;
-    [SerializeField] private GameObject[] RoadPrefabsLevel2;
-    [SerializeField] private float secToMedium = 100;
-    [SerializeField] private GameObject[] RoadPrefabsLevel3;
-    [SerializeField] private float secToHard = 100;
+    [SerializeField] private GameObject[] _roadPrefabsLevel1;
+    [SerializeField] private GameObject[] _roadPrefabsLevel2;
+    [SerializeField] private float _secToMedium = 100;
+    [SerializeField] private GameObject[] _roadPrefabsLevel3;
+    [SerializeField] private float _secToHard = 100;
     public enum LevelDifficulty 
     {
         Easy = 1,
@@ -17,11 +17,11 @@ public class RoadGenerator : MonoBehaviour
         Hard = 3
     }
     public LevelDifficulty levelDifficulty = LevelDifficulty.Easy;
-    private List<GameObject> Roads = new List<GameObject>();
-    public float maxSpeed = 10;
-    private float currentSpeed = 0;
-    [SerializeField] private int maxRoadCount;
-    [SerializeField] private Vector3 startPose;
+    private List<GameObject> _roads = new List<GameObject>();
+    public float MaxSpeed = 10;
+    private float _currentSpeed = 0;
+    [SerializeField] private int _maxRoadCount;
+    [SerializeField] private Vector3 _startPose;
 
     void Awake()
     {
@@ -57,17 +57,17 @@ public class RoadGenerator : MonoBehaviour
 
     void Update()
     {
-        if(currentSpeed == 0) return; 
+        if(_currentSpeed == 0) return; 
 
-        foreach(GameObject road in Roads)
+        foreach(GameObject road in _roads)
         {
-            road.transform.position -= new Vector3(currentSpeed * Time.deltaTime, 0, 0);
+            road.transform.position -= new Vector3(_currentSpeed * Time.deltaTime, 0, 0);
         }
 
-        if(Roads[0].transform.position.x < -70)
+        if(_roads[0].transform.position.x < -70)
         {
-            Destroy(Roads[0]);
-            Roads.RemoveAt(0);
+            Destroy(_roads[0]);
+            _roads.RemoveAt(0);
             CreateNewRoad();
         }
     }
@@ -78,32 +78,32 @@ public class RoadGenerator : MonoBehaviour
         switch (levelDifficulty)
         {
             case LevelDifficulty.Easy:
-                RoadPrefabs = RoadPrefabsLevel1;
+                RoadPrefabs = _roadPrefabsLevel1;
                 break;
             case LevelDifficulty.Medium:
-                RoadPrefabs = RoadPrefabsLevel2;
+                RoadPrefabs = _roadPrefabsLevel2;
                 break;
             case LevelDifficulty.Hard:
-                RoadPrefabs = RoadPrefabsLevel3;
+                RoadPrefabs = _roadPrefabsLevel3;
                 break;
         }
-        Vector3 pos = Roads.Count > 0 ? Roads[Roads.Count-1].transform.position + new Vector3(56,0,0) : startPose;
+        Vector3 pos = _roads.Count > 0 ? _roads[_roads.Count-1].transform.position + new Vector3(56,0,0) : _startPose;
         int index = isFirstRoad ? 0 : Random.Range(0, RoadPrefabs.Length);
 
         GameObject newRoad = Instantiate(RoadPrefabs[index], pos, Quaternion.identity);
         newRoad.transform.SetParent(transform);
-        Roads.Add(newRoad);
+        _roads.Add(newRoad);
     }
 
     void ResetLevel()
     {
-        currentSpeed = 0;
-        while(Roads.Count > 0)
+        _currentSpeed = 0;
+        while(_roads.Count > 0)
         {
-            Destroy(Roads[0]);
-            Roads.RemoveAt(0);
+            Destroy(_roads[0]);
+            _roads.RemoveAt(0);
         }
-        for(int i = 0; i < maxRoadCount; i++)
+        for(int i = 0; i < _maxRoadCount; i++)
         {
             if(i < 3)
             {
@@ -120,21 +120,21 @@ public class RoadGenerator : MonoBehaviour
 
     void StopLevel()
     {
-        currentSpeed = 0;
+        _currentSpeed = 0;
         StopAllCoroutines();
     }
 
     void StartLevel()
     {
-        currentSpeed = maxSpeed;
+        _currentSpeed = MaxSpeed;
         StartCoroutine(ChangeLevelDifficulty());
     }
 
     IEnumerator ChangeLevelDifficulty()
     {
-        yield return new WaitForSeconds(secToMedium);
+        yield return new WaitForSeconds(_secToMedium);
         levelDifficulty = LevelDifficulty.Medium;
-        yield return new WaitForSeconds(secToHard);
+        yield return new WaitForSeconds(_secToHard);
         levelDifficulty = LevelDifficulty.Hard;
     }
 }

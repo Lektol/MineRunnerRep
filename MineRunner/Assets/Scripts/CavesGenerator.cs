@@ -5,15 +5,15 @@ using UnityEngine;
 public class CavesGenerator : MonoBehaviour
 {
     //[SerializeField] private GameObject[] CavesPrefabs;
-    private GameObject LastCave;
-    private ObjectPool objectPool;
-    [SerializeField] private Vector3 startPose;
-    [SerializeField] private float speedDevider; 
-    private float currentSpeed = 0;
+    private GameObject _lastCave;
+    private ObjectPool _objectPool;
+    [SerializeField] private Vector3 _startPose;
+    [SerializeField] private float _speedDevider; 
+    private float _currentSpeed = 0;
 
     void Start()
     {
-        objectPool = GetComponent<ObjectPool>();
+        _objectPool = GetComponent<ObjectPool>();
         ResetLevel();
     }
 
@@ -35,14 +35,14 @@ public class CavesGenerator : MonoBehaviour
 
     void Update()
     {
-        if(currentSpeed == 0) return; 
+        if(_currentSpeed == 0) return; 
 
-        foreach(GameObject cave in objectPool.pool)
+        foreach(GameObject cave in _objectPool.pool)
         {
-            cave.transform.position -= new Vector3(currentSpeed / speedDevider * Time.deltaTime, 0, 0);
+            cave.transform.position -= new Vector3(_currentSpeed / _speedDevider * Time.deltaTime, 0, 0);
         }
 
-        foreach(GameObject cave in objectPool.pool)
+        foreach(GameObject cave in _objectPool.pool)
         {
             if(cave.transform.position.x < -90)
             {
@@ -56,24 +56,24 @@ public class CavesGenerator : MonoBehaviour
     void CreateNewCave()
     {
         //objectPool.IsHereActiveObj();
-        Vector3 pos = objectPool.IsHereActiveObj() ? LastCave.transform.position + new Vector3(72,0,0) : startPose;
-        GameObject newCave = objectPool.GetObject(pos, Quaternion.identity);
-        LastCave = newCave;
+        Vector3 pos = _objectPool.IsHereActiveObj() ? _lastCave.transform.position + new Vector3(72,0,0) : _startPose;
+        GameObject newCave = _objectPool.GetObject(pos, Quaternion.identity);
+        _lastCave = newCave;
     }
 
     void ResetLevel()
     {
-        objectPool.DisableAll();
-        for(int i = 0; i < objectPool.PoolSize(); i++) CreateNewCave();
+        _objectPool.DisableAll();
+        for(int i = 0; i < _objectPool.PoolSize(); i++) CreateNewCave();
     }
 
     void StopLevel()
     {
-        currentSpeed = 0;
+        _currentSpeed = 0;
     }
 
     void ChangeSpeedToMax()
     {
-        currentSpeed = RoadGenerator.Instance.maxSpeed;
+        _currentSpeed = RoadGenerator.Instance.MaxSpeed;
     }
 }

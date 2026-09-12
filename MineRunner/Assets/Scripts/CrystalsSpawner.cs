@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class CrystalsSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject CrystalParent;
+    [SerializeField] private GameObject _crystalParent;
     [Range(0f,1f)]
-    [SerializeField] private float chanceToSpawn = 0.5f;
+    [SerializeField] private float _chanceToSpawn = 0.5f;
 
     void Start()
     {
         float chance = UnityEngine.Random.Range(0f, 1f);
-        if(chanceToSpawn >= chance)
+        if(_chanceToSpawn >= chance)
         {
-            CrystalParent.SetActive(true);
+            _crystalParent.SetActive(true);
         }
     }
 }

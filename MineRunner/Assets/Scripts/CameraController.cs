@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform MenuPos;
-    [SerializeField] private Transform MainPos;
-    private Vector3 TargetPos;
-    private Vector3 TargetRotate;
-    [SerializeField] private Vector3 MenuRotation;
-    [SerializeField] private Vector3 MainRotation;
-    [SerializeField] private int smoothSpeed;
-    [SerializeField] private float cameraSmoothSpeed;
+    [SerializeField] private Transform _menuPos;
+    [SerializeField] private Transform _mainPos;
+    private Vector3 _targetPos;
+    private Vector3 _targetRotate;
+    [SerializeField] private Vector3 _menuRotation;
+    [SerializeField] private Vector3 _mainRotation;
+    [SerializeField] private int _smoothSpeed;
+    [SerializeField] private float _cameraSmoothSpeed;
 
     void Start()
     {
-        TargetPos = MenuPos.position;
-        TargetRotate = MenuRotation;
+        _targetPos = _menuPos.position;
+        _targetRotate = _menuRotation;
     } 
     void OnEnable()
     {
@@ -32,21 +32,21 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, TargetPos, cameraSmoothSpeed*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _targetPos, _cameraSmoothSpeed*Time.deltaTime);
 
-        Quaternion targetRotation = Quaternion.Euler(TargetRotate);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothSpeed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.Euler(_targetRotate);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _smoothSpeed * Time.deltaTime);
     }
 
     void SetMainPos()
     {
-        TargetPos = MainPos.position; 
-        TargetRotate = MainRotation;
+        _targetPos = _mainPos.position; 
+        _targetRotate = _mainRotation;
     }
 
     void SetMenuPos()
     {
-        TargetPos = MenuPos.position; 
-        TargetRotate = MenuRotation;
+        _targetPos = _menuPos.position; 
+        _targetRotate = _menuRotation;
     }
 }

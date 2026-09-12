@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
-    private int crystals;
-    public int Crystals => crystals;
+    private int _crystals;
+    public int Crystals => _crystals;
 
     public event Action<int> OnCrystalsChanged;
 
@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour
 
     void AddCrystal()
     {
-        crystals += 1;
+        _crystals += 1;
         OnCrystalsChanged?.Invoke(Crystals);
     }
 }

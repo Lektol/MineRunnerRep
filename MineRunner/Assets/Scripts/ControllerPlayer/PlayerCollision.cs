@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private bool isInvincible = false;
+    private bool _isInvincible = false;
     public bool IsInvincible
     {
-        get{ return isInvincible; }
+        get{ return _isInvincible; }
         set
         {
-            isInvincible = value;
-            SphereInvincible.SetActive(value);
+            _isInvincible = value;
+            _sphereInvincible.SetActive(value);
         }
     }
     
     public bool IsFlying = false;
-    private bool isDown = false;
+    private bool _isDown = false;
     public bool IsDown
     {
-        get { return isDown; }
+        get { return _isDown; }
         set
         {
-            isDown = value;
-            animator.SetBool("IsDown", value);
+            _isDown = value;
+            _animator.SetBool("IsDown", value);
         }
     }
     public bool RequestToDown = false;
-    [SerializeField] GameObject SphereInvincible;
-    private Animator animator;
-    private PlayerController playerController;
+    [SerializeField] private GameObject _sphereInvincible;
+    private Animator _animator;
+    private PlayerController _playerController;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
+        _animator = GetComponent<Animator>();
+        _playerController = GetComponent<PlayerController>();
     }
 
     public void SetStartStats()
@@ -52,7 +52,7 @@ public class PlayerCollision : MonoBehaviour
             IsFlying = false;
             if (RequestToDown)
             {
-                playerController.StartCoroutine(playerController.Down());
+                _playerController.StartCoroutine(_playerController.Down());
                 RequestToDown = false;
             }
         }

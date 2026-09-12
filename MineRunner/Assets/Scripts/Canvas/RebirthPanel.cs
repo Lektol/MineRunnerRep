@@ -6,9 +6,9 @@ using YG;
 
 public class RebirthPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject RebPanel;
-    [SerializeField] private TextMeshProUGUI TextSec;
-    [SerializeField] private int SecToOffer;
+    [SerializeField] private GameObject _rebPanel;
+    [SerializeField] private TextMeshProUGUI _textSec;
+    [SerializeField] private int _secToOffer;
 
     void OnEnable()
     {
@@ -26,10 +26,10 @@ public class RebirthPanel : MonoBehaviour
     }
     IEnumerator OfferRebirth()
     {
-        RebPanel.SetActive(true);
-        for(int i = SecToOffer; i > 0; i--)
+        _rebPanel.SetActive(true);
+        for(int i = _secToOffer; i > 0; i--)
         {
-            TextSec.text = "" + i;
+            _textSec.text = "" + i;
             yield return new WaitForSeconds(1);
         }
         ExitPanel();
@@ -38,14 +38,14 @@ public class RebirthPanel : MonoBehaviour
     public void ExitPanel()
     {
         StopAllCoroutines();
-        RebPanel.SetActive(false);
+        _rebPanel.SetActive(false);
         EventManager.OnResetGameInvoke();
     }
 
     public void GetOffer()
     {
         StopAllCoroutines();
-        RebPanel.SetActive(false);
+        _rebPanel.SetActive(false);
         YG2.InterstitialAdvShow();
         EventManager.OnRebirthInvoke();
     }

@@ -4,8 +4,8 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [Header("Настройки пула")]
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private int poolSize = 10; 
+    [SerializeField] private GameObject _prefab;
+    [SerializeField] private int _poolSize = 10; 
 
     public List<GameObject> pool {get; private set;}
 
@@ -16,9 +16,9 @@ public class ObjectPool : MonoBehaviour
 
     private void InitPool()
     {
-        pool = new List<GameObject>(poolSize);
+        pool = new List<GameObject>(_poolSize);
 
-        for (int i = 0; i < poolSize; i++)
+        for (int i = 0; i < _poolSize; i++)
         {
             CreateNewObject();
         }
@@ -26,7 +26,7 @@ public class ObjectPool : MonoBehaviour
 
     private GameObject CreateNewObject()
     {
-        GameObject obj = Instantiate(prefab, transform);
+        GameObject obj = Instantiate(_prefab, transform);
         obj.SetActive(false);
         pool.Add(obj);
         return obj;
@@ -73,5 +73,5 @@ public class ObjectPool : MonoBehaviour
         return false;
     }
 
-    public int PoolSize() => poolSize;
+    public int PoolSize() => _poolSize;
 }

@@ -4,8 +4,8 @@ using YG;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] private GameObject PlayablePanel;
-    [SerializeField] private GameObject MenuPanel; 
+    [SerializeField] private GameObject _playablePanel;
+    [SerializeField] private GameObject _menuPanel; 
 
     void OnEnable()
     {
@@ -26,13 +26,13 @@ public class CanvasManager : MonoBehaviour
 
     void SetActivePlayablePanel()
     {
-        MenuPanel.SetActive(false);
-        PlayablePanel.SetActive(true);
+        _menuPanel.SetActive(false);
+        _playablePanel.SetActive(true);
     }
 
     void SetActiveMenuPanel()
     {
-        MenuPanel.SetActive(true);
-        PlayablePanel.SetActive(false);
+        _menuPanel.SetActive(true);
+        _playablePanel.SetActive(false);
     }
 }
