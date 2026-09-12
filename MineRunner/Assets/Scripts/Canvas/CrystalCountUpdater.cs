@@ -6,14 +6,24 @@ public class CrystalCountUpdater : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _crystalCount;
     private PlayerStats _playerStatsInstance;
 
-    void Start()
+    private void Start()
     {
         _playerStatsInstance = PlayerStats.Instance;
         ChangeCrystalCountText(_playerStatsInstance.Crystals);
-        OnEnable(); //так как не факт, что Awake в PlayerStats вызовется раньше нашего OnEnable
+        SubscribeToCrystalChanged();
     }
 
-    void OnEnable()
+    private void OnEnable()
+    {
+        SubscribeToCrystalChanged();
+    }
+
+    private void OnDisable()
+    {
+        _playerStatsInstance.OnCrystalsChanged -= ChangeCrystalCountText;
+    }
+
+    private void SubscribeToCrystalChanged()
     {
         if (_playerStatsInstance != null)
         {
@@ -22,11 +32,6 @@ public class CrystalCountUpdater : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        _playerStatsInstance.OnCrystalsChanged -= ChangeCrystalCountText;
-    }
-
-    void ChangeCrystalCountText(int count) => _crystalCount.text = "" + count;
+    private void ChangeCrystalCountText(int count) => _crystalCount.text = "" + count;
 
 }
