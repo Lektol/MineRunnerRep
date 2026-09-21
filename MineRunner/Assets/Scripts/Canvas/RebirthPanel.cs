@@ -43,6 +43,7 @@ public class RebirthPanel : MonoBehaviour
         _rebPanel.SetActive(false);
         _pauseButton.SetActive(true);
         EventManager.OnResetGameInvoke();
+        EventManager.OnShowAddInvoke();
     }
 
     public void GetOffer()

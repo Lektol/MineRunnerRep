@@ -7,6 +7,7 @@ public class EventManager
     public static event Action OnResetGame;
     public static event Action OnGetCrystal;
     public static event Action OnRebirth;
+    public static event Action OnShowAdd;
 
     public static void OnStartGameInvoke()
     {
@@ -31,5 +32,10 @@ public class EventManager
     public static void OnRebirthInvoke()
     {
         OnRebirth?.Invoke();
+    }
+
+    public static void OnShowAddInvoke()
+    {
+        OnShowAdd?.Invoke();
     }
 }

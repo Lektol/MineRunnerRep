@@ -1,11 +1,18 @@
 using System;
 using UnityEngine;
+using YG;
 
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
-    private int _crystals;
-    public int Crystals => _crystals;
+    public int Crystals
+    {
+        get{ return YG2.saves.Crystals; }
+        private set 
+        { 
+            YG2.saves.Crystals = value; 
+        }
+    }
 
     public event Action<int> OnCrystalsChanged;
 
@@ -20,19 +27,31 @@ public class PlayerStats : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         EventManager.OnGetCrystal += AddCrystal;
+        EventManager.OnStartGame += SaveProgressAndSetNull;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EventManager.OnGetCrystal -= AddCrystal;
+        EventManager.OnStartGame -= SaveProgressAndSetNull;
     }
 
-    void AddCrystal()
+    private void AddCrystal()
     {
-        _crystals += 1;
+        Crystals += 1;
+        OnCrystalsChanged?.Invoke(Crystals);
+    }
+    private void SaveProgressAndSetNull()
+    {
+        if(Crystals > YG2.saves.MaxCrystals)
+        {
+            YG2.SetLeaderboard("LeaderBoardSpike", Crystals);
+            YG2.saves.MaxCrystals = Crystals;
+        }
+        Crystals = 0;
         OnCrystalsChanged?.Invoke(Crystals);
     }
 }
