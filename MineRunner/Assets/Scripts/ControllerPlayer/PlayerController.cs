@@ -7,10 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     private int _currentLine = 2;
     private Vector3 _targetPos;
-    [SerializeField] private float _lineChangeSpeed = 30f;
-    [SerializeField] private float _jumpPower = 20f;
+    [SerializeField] private float _lineChangeSpeed = 45f;
+    [SerializeField] private float _jumpPower = 30f;
+    [Tooltip("С какой силой Спайк выкидывается с рельс при проигрыше")]
     [SerializeField] private float _jumpDeadPower = 25f;
-    [SerializeField] private float _gravity = -40f;
+    [SerializeField] private float _gravity = -50f;
     private bool _isWheelsRotating = false;
     private bool _canControll = false;
     [SerializeField] private float _secToDown = 1;
