@@ -45,7 +45,7 @@ public class PlayerCollision : MonoBehaviour
         IsInvincible = false;
     }
 
-    void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Rails"))
         {
@@ -58,7 +58,15 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("JumpSpring") && RequestToDown)
+        {
+            _playerController.Jump(1.25f);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Rails"))
         {
@@ -66,7 +74,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Barrier") && IsInvincible == false)
         {

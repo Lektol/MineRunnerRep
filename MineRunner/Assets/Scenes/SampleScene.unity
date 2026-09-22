@@ -4681,9 +4681,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineChangeSpeed: 45
-  _jumpPower: 20
+  _jumpPower: 30
   _jumpDeadPower: 25
-  _gravity: -40
+  _gravity: -60
   _secToDown: 1
   _secToInvincible: 5
   _wheels:

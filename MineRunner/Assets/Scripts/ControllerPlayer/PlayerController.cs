@@ -128,9 +128,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void Jump()
+    public void Jump(float multiplier = 1f)
     {
-        _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * _jumpPower * multiplier, ForceMode.Impulse);
         if(_coroutineDown != null)
         {
             StopCoroutine(_coroutineDown);
