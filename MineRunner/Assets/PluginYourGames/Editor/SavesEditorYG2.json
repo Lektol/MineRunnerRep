@@ -1,0 +1,13 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 1,
+    "Crystals": 1,
+    "MaxCrystals": 1
+}

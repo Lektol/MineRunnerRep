@@ -2638,6 +2638,10 @@ PrefabInstance:
       value: LeaderBoardSpike
       objectReference: {fileID: 0}
     - target: {fileID: 427125380090051075, guid: f40a236569a66c344b68a9feb3f86a18, type: 3}
+      propertyPath: playerDataPrefab
+      value: 
+      objectReference: {fileID: 7442660659306160117, guid: ef8880f86332fe641978c527ca4ee7ef, type: 3}
+    - target: {fileID: 427125380090051075, guid: f40a236569a66c344b68a9feb3f86a18, type: 3}
       propertyPath: onUpdateData.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}

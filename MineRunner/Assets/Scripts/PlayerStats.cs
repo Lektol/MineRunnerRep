@@ -50,6 +50,7 @@ public class PlayerStats : MonoBehaviour
         {
             YG2.SetLeaderboard("LeaderBoardSpike", Crystals);
             YG2.saves.MaxCrystals = Crystals;
+            YG2.SaveProgress();
         }
         Crystals = 0;
         OnCrystalsChanged?.Invoke(Crystals);
