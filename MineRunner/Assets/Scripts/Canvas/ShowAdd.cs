@@ -12,12 +12,12 @@ public class ShowAdd : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnShowAdd += ShowAd;
+        EventManager.OnTotalLose += ShowAd;
     }
 
     private void OnDisable()
     {
-        EventManager.OnShowAdd -= ShowAd;
+        EventManager.OnTotalLose -= ShowAd;
         if(coroutine != null)
         {
             StopCoroutine(coroutine);
