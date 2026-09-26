@@ -4681,9 +4681,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineChangeSpeed: 45
-  _jumpPower: 30
-  _jumpDeadPower: 25
+  _lineWidth: 9
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.5
+      outSlope: 3.5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 0.7
+      inSlope: 2.5675347
+      outSlope: 2.5675347
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23750946
+      outWeight: 0.15826496
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.027940897
+      outSlope: -0.027940897
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.53101647
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8
+      value: 0.7
+      inSlope: -2.4751785
+      outSlope: -2.4751785
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24841209
+      outWeight: 0.2174114
+    - serializedVersion: 3
+      time: 1.0023419
+      value: 0.005772788
+      inSlope: -3.430962
+      outSlope: -3.430962
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpPower: 7
+  _jumpDuration: 1
   _gravity: -60
+  _downImpulse: 35
+  _maxFallSpeed: -60
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundCheckDistance: 5
+  _groundCheckOffset: 0.5
+  _groundCheckOffsetX1: 3
+  _groundCheckOffsetX2: -3
+  _groundCheckOffsetZ1: 1.5
+  _groundCheckOffsetZ2: -1.5
+  _jumpDeadPower: 25
   _secToDown: 1
   _secToInvincible: 5
   _wheels:
@@ -4691,6 +4755,7 @@ MonoBehaviour:
   - {fileID: 1792274200}
   - {fileID: 1714321385}
   - {fileID: 97830953}
+  _vState: 0
 --- !u!4 &1784173161
 Transform:
   m_ObjectHideFlags: 0
@@ -4731,8 +4796,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -4790,8 +4855,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e127f4c8e2decef42ba0c0e9ed6ae889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsFlying: 0
-  RequestToDown: 0
   _sphereInvincible: {fileID: 876491062}
 --- !u!1 &1792274199
 GameObject:

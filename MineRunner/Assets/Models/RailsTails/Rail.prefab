@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8881696273973435542}
   - component: {fileID: 8298694903762110105}
   - component: {fileID: 8149635650870876663}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rail
   m_TagString: Rails
   m_Icon: {fileID: 0}
