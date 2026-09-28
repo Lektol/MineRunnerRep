@@ -23,7 +23,7 @@ public class RoadGenerator : MonoBehaviour
     [SerializeField] private int _maxRoadCount;
     [SerializeField] private Vector3 _startPose;
 
-    void Awake()
+    private void Awake()
     {
         if(Instance != null)
         {
@@ -34,12 +34,12 @@ public class RoadGenerator : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    private void Start()
     {
         ResetLevel();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         EventManager.OnStartGame += StartLevel;
         EventManager.OnLoseGame += StopLevel;
@@ -47,7 +47,7 @@ public class RoadGenerator : MonoBehaviour
         EventManager.OnRebirth += StartLevel;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         EventManager.OnStartGame -= StartLevel;
         EventManager.OnLoseGame -= StopLevel;
@@ -55,7 +55,7 @@ public class RoadGenerator : MonoBehaviour
         EventManager.OnRebirth -= StartLevel;
     }
 
-    void Update()
+    private void Update()
     {
         if(_currentSpeed == 0) return; 
 
@@ -72,7 +72,7 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
-    void CreateNewRoad(bool isFirstRoad = false)
+    private void CreateNewRoad(bool setStartRoad = false)
     {
         GameObject[] RoadPrefabs = null;
         switch (levelDifficulty)
@@ -88,14 +88,14 @@ public class RoadGenerator : MonoBehaviour
                 break;
         }
         Vector3 pos = _roads.Count > 0 ? _roads[_roads.Count-1].transform.position + new Vector3(56,0,0) : _startPose;
-        int index = isFirstRoad ? 0 : Random.Range(0, RoadPrefabs.Length);
+        int index = setStartRoad ? 0 : Random.Range(1, RoadPrefabs.Length);
 
         GameObject newRoad = Instantiate(RoadPrefabs[index], pos, Quaternion.identity);
         newRoad.transform.SetParent(transform);
         _roads.Add(newRoad);
     }
 
-    void ResetLevel()
+    private void ResetLevel()
     {
         StopLevel();
         while(_roads.Count > 0)
@@ -117,23 +117,23 @@ public class RoadGenerator : MonoBehaviour
         levelDifficulty = LevelDifficulty.Easy;
     }
 
-    void StopLevel()
+    private void StopLevel()
     {
         _currentSpeed = 0;
         StopAllCoroutines();
     }
 
-    void StartLevel()
+    private void StartLevel()
     {
         _currentSpeed = MaxSpeed;
-        StartCoroutine(ChangeLevelDifficulty());
+        //StartCoroutine(ChangeLevelDifficulty());
     }
 
-    IEnumerator ChangeLevelDifficulty()
-    {
-        yield return new WaitForSeconds(_secToMedium);
-        levelDifficulty = LevelDifficulty.Medium;
-        yield return new WaitForSeconds(_secToHard);
-        levelDifficulty = LevelDifficulty.Hard;
-    }
+    // private IEnumerator ChangeLevelDifficulty()
+    // {
+    //     yield return new WaitForSeconds(_secToMedium);
+    //     levelDifficulty = LevelDifficulty.Medium;
+    //     yield return new WaitForSeconds(_secToHard);
+    //     levelDifficulty = LevelDifficulty.Hard;
+    // }
 }

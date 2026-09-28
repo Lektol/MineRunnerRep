@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _isWheelsRotating;
     private bool _canControll;
-    private Coroutine _jumpCoroutine;
+    //private Coroutine _jumpCoroutine;
     private Coroutine _coroutineDown;
 
     private Rigidbody _rb;
@@ -205,13 +205,13 @@ public class PlayerController : MonoBehaviour
                 _vState = VerticalState.Grounded;
                 _currentY = GetGroundY();
                 _verticalVelocity = 0f;
-                _jumpCoroutine = null;
+                //_jumpCoroutine = null;
             }
             else
             {
                 _vState = VerticalState.Falling;
                 _verticalVelocity = 0f;
-                _jumpCoroutine = null;
+                //_jumpCoroutine = null;
             }
             return;
         }

@@ -9,6 +9,10 @@
         {
             "key": "FirstStartup_YG2",
             "value": 2
+        },
+        {
+            "key": "YG2.LocalProd.AutoRunAfterBuild",
+            "value": 1
         }
     ],
     "floatPrefs": []
