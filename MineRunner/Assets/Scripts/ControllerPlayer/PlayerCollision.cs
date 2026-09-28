@@ -32,11 +32,13 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private GameObject _sphereInvincible;
     private Animator _animator;
     private PlayerController _playerController;
+    private PlayerParticles _playerParticles;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _playerController = GetComponent<PlayerController>();
+        _playerParticles = GetComponent<PlayerParticles>();
     }
 
     public void SetStartStats()
@@ -67,7 +69,8 @@ public class PlayerCollision : MonoBehaviour
 
         if (other.CompareTag("JumpSpring") && RequestToDown)
         {
-            _playerController.Jump(1.5f);
+            _playerController.Jump(1.55f);
+            _playerParticles.OnParticleLanding();
             RequestToDown = false;
         }
     }

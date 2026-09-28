@@ -1,3 +1,3 @@
-﻿Build path: C:/Users/PC/Documents/Билды игры/MineRunner/Билд9
-Build number: 9
+﻿Build path: C:/Users/PC/Documents/Билды игры/MineRunner/Билд10
+Build number: 10
 PluginYG version: 2.0092

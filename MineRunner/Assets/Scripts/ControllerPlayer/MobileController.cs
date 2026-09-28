@@ -56,7 +56,6 @@ public class MobileController : MonoBehaviour, IControllable
             }
         }
         if(_isTouching) _currentTimeToTouch += 1 * Time.deltaTime;
-        Debug.Log(_currentTimeToTouch);
         
         #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))

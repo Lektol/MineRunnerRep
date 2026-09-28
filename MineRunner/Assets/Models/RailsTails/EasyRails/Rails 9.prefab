@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1779678283647811739}
   - component: {fileID: 631491604852897426}
+  - component: {fileID: 3099367134554909972}
   m_Layer: 0
   m_Name: Rails 9
   m_TagString: Untagged
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _crystalParent: {fileID: 5646899592092718494}
   _chanceToSpawn: 0.5
+--- !u!114 &3099367134554909972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406795157332630854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ad4c238a46fad4f9cfb857d2187657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _length: 56
 --- !u!1 &5646899592092718494
 GameObject:
   m_ObjectHideFlags: 0

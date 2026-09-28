@@ -37,7 +37,7 @@ public class CavesGenerator : MonoBehaviour
     {
         if(_currentSpeed == 0) return; 
 
-        foreach(GameObject cave in _objectPool.pool)
+        foreach(GameObject cave in _objectPool.Pool)
         {
             cave.transform.position -= new Vector3(_currentSpeed / _speedDevider * Time.deltaTime, 0, 0);
             if(cave.transform.position.x < -90)

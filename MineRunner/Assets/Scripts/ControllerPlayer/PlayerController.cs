@@ -65,12 +65,14 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private IControllable _controllable;
     private PlayerCollision _playerCollision;
+    private PlayerParticles _playerParticles;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _playerCollision = GetComponent<PlayerCollision>();
+        _playerParticles = GetComponent<PlayerParticles>();
     }
 
     private void Start()
@@ -239,6 +241,7 @@ public class PlayerController : MonoBehaviour
             {
                 _playerCollision.RequestToDown = false;
                 _playerCollision.IsFlying = false;
+                _playerParticles.OnParticleLanding();
                 if (_coroutineDown == null)
                     _coroutineDown = StartCoroutine(Down());
             }
@@ -282,7 +285,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("hitPoint" + hit.point.y + 3.7f);
             return hit.point.y + 3.7f;
         }
-        Debug.Log(_currentY);
         return _currentY;
     }
 

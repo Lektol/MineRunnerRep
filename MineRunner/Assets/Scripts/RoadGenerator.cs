@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class RoadGenerator : MonoBehaviour
 {
-    public static RoadGenerator Instance { get; private set;}
-    [SerializeField] private GameObject[] _roadPrefabsLevel1;
-    [SerializeField] private GameObject[] _roadPrefabsLevel2;
-    [SerializeField] private float _secToMedium = 100;
-    [SerializeField] private GameObject[] _roadPrefabsLevel3;
-    [SerializeField] private float _secToHard = 100;
-    public enum LevelDifficulty 
-    {
-        Easy = 1,
-        Medium = 2,
-        Hard = 3
-    }
-    public LevelDifficulty levelDifficulty = LevelDifficulty.Easy;
+    public static RoadGenerator Instance { get; private set; }
+    [SerializeField] private GameObject[] _roadPrefabs;
+    private ObjectPool[] _roadsPools;
     private List<GameObject> _roads = new List<GameObject>();
     public float MaxSpeed = 10;
     private float _currentSpeed = 0;
@@ -25,13 +15,29 @@ public class RoadGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
-           Destroy(gameObject); 
-           return;
-        } 
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _roadsPools = new ObjectPool[_roadPrefabs.Length];
+
+        for (int i = 0; i < _roadsPools.Length; i++)
+        {
+            GameObject poolObject = new GameObject($"RoadPool_{i}");
+            poolObject.transform.SetParent(transform);
+
+            ObjectPool pool = poolObject.AddComponent<ObjectPool>();
+
+            pool.SetPrefab(_roadPrefabs[i]);
+            pool.InitPool();
+
+            _roadsPools[i] = pool;
+        }
     }
 
     private void Start()
@@ -57,16 +63,16 @@ public class RoadGenerator : MonoBehaviour
 
     private void Update()
     {
-        if(_currentSpeed == 0) return; 
+        if (_currentSpeed == 0) return;
 
-        foreach(GameObject road in _roads)
+        foreach (GameObject road in _roads)
         {
             road.transform.position -= new Vector3(_currentSpeed * Time.deltaTime, 0, 0);
         }
 
-        if(_roads[0].transform.position.x < -70)
+        if (_roads[0].transform.position.x < -70)
         {
-            Destroy(_roads[0]);
+            _roads[0].SetActive(false);
             _roads.RemoveAt(0);
             CreateNewRoad();
         }
@@ -74,23 +80,12 @@ public class RoadGenerator : MonoBehaviour
 
     private void CreateNewRoad(bool setStartRoad = false)
     {
-        GameObject[] RoadPrefabs = null;
-        switch (levelDifficulty)
-        {
-            case LevelDifficulty.Easy:
-                RoadPrefabs = _roadPrefabsLevel1;
-                break;
-            case LevelDifficulty.Medium:
-                RoadPrefabs = _roadPrefabsLevel2;
-                break;
-            case LevelDifficulty.Hard:
-                RoadPrefabs = _roadPrefabsLevel3;
-                break;
-        }
-        Vector3 pos = _roads.Count > 0 ? _roads[_roads.Count-1].transform.position + new Vector3(56,0,0) : _startPose;
-        int index = setStartRoad ? 0 : Random.Range(1, RoadPrefabs.Length);
+        int index = setStartRoad ? 0 : Random.Range(1, _roadsPools.Length);
+        var roadSegmentLenght = _roadsPools[index].PrefabObj.GetComponent<RoadSegment>().Length;
+        Vector3 pos = _roads.Count > 0 ? _roads[_roads.Count - 1].transform.position + Vector3.right * roadSegmentLenght : _startPose;
 
-        GameObject newRoad = Instantiate(RoadPrefabs[index], pos, Quaternion.identity);
+        //GameObject newRoad = Instantiate(_roadPrefabs[index], pos, Quaternion.identity);
+        GameObject newRoad = _roadsPools[index].GetObject(pos, Quaternion.identity);
         newRoad.transform.SetParent(transform);
         _roads.Add(newRoad);
     }
@@ -98,14 +93,14 @@ public class RoadGenerator : MonoBehaviour
     private void ResetLevel()
     {
         StopLevel();
-        while(_roads.Count > 0)
+        while (_roads.Count > 0)
         {
-            Destroy(_roads[0]);
+            _roads[0].SetActive(false);
             _roads.RemoveAt(0);
         }
-        for(int i = 0; i < _maxRoadCount; i++)
+        for (int i = 0; i < _maxRoadCount; i++)
         {
-            if(i < 3)
+            if (i < 3)
             {
                 CreateNewRoad(true);
             }
@@ -114,7 +109,6 @@ public class RoadGenerator : MonoBehaviour
                 CreateNewRoad();
             }
         }
-        levelDifficulty = LevelDifficulty.Easy;
     }
 
     private void StopLevel()
@@ -126,14 +120,5 @@ public class RoadGenerator : MonoBehaviour
     private void StartLevel()
     {
         _currentSpeed = MaxSpeed;
-        //StartCoroutine(ChangeLevelDifficulty());
     }
-
-    // private IEnumerator ChangeLevelDifficulty()
-    // {
-    //     yield return new WaitForSeconds(_secToMedium);
-    //     levelDifficulty = LevelDifficulty.Medium;
-    //     yield return new WaitForSeconds(_secToHard);
-    //     levelDifficulty = LevelDifficulty.Hard;
-    // }
 }

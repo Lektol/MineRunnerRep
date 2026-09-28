@@ -7,16 +7,27 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private GameObject _prefab;
     [SerializeField] private int _poolSize = 10; 
 
-    public List<GameObject> pool {get; private set;}
+    public List<GameObject> Pool {get; private set;}
+    public GameObject PrefabObj => _prefab;
 
     private void Awake()
     {
         InitPool();
     }
 
-    private void InitPool()
+    public void SetPrefab(GameObject gameObjectPref)
     {
-        pool = new List<GameObject>(_poolSize);
+        _prefab = gameObjectPref;
+    }
+
+    public void InitPool()
+    {
+        if(_prefab == null)
+        {
+            Debug.LogWarning("На пулл объекта:" + gameObject.name + " нету объекта префаба");
+            return;
+        }
+        Pool = new List<GameObject>(_poolSize);
 
         for (int i = 0; i < _poolSize; i++)
         {
@@ -28,18 +39,18 @@ public class ObjectPool : MonoBehaviour
     {
         GameObject obj = Instantiate(_prefab, transform);
         obj.SetActive(false);
-        pool.Add(obj);
+        Pool.Add(obj);
         return obj;
     }
 
 
     public GameObject GetObject(Vector3 position, Quaternion rotation)
     {
-        for (int i = 0; i < pool.Count; i++)
+        for (int i = 0; i < Pool.Count; i++)
         {
-            if (!pool[i].activeInHierarchy)
+            if (!Pool[i].activeInHierarchy)
             {
-                GameObject obj = pool[i];
+                GameObject obj = Pool[i];
                 obj.transform.position = position;
                 obj.transform.rotation = rotation;
                 obj.SetActive(true);
@@ -58,7 +69,7 @@ public class ObjectPool : MonoBehaviour
 
     public void DisableAll()
     {
-        foreach (GameObject obj in pool)
+        foreach (GameObject obj in Pool)
         {
             obj.SetActive(false);
         }
@@ -66,7 +77,7 @@ public class ObjectPool : MonoBehaviour
 
     public bool IsHereActiveObj()
     {
-        foreach (GameObject obj in pool)
+        foreach (GameObject obj in Pool)
         {
             if(obj.activeSelf) return true;
         } 
