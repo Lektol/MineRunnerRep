@@ -4698,11 +4698,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1784173161}
   - component: {fileID: 1784173165}
-  - component: {fileID: 1784173160}
   - component: {fileID: 1784173162}
   - component: {fileID: 1784173163}
   - component: {fileID: 1784173164}
   - component: {fileID: 1784173166}
+  - component: {fileID: 1784173170}
+  - component: {fileID: 1784173169}
+  - component: {fileID: 1784173168}
+  - component: {fileID: 1784173167}
   m_Layer: 0
   m_Name: Trolley
   m_TagString: Player
@@ -4710,94 +4713,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1784173160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784173158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e55d8a0ba8f3ed44180766b18e2cfa33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lineChangeSpeed: 45
-  _lineWidth: 9
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.5
-      outSlope: 3.5
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2
-      value: 0.7
-      inSlope: 2.5675347
-      outSlope: 2.5675347
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23750946
-      outWeight: 0.15826496
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: -0.027940897
-      outSlope: -0.027940897
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.53101647
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8
-      value: 0.7
-      inSlope: -2.4751785
-      outSlope: -2.4751785
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.24841209
-      outWeight: 0.2174114
-    - serializedVersion: 3
-      time: 1.0023419
-      value: 0.005772788
-      inSlope: -3.430962
-      outSlope: -3.430962
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _jumpPower: 7
-  _jumpDuration: 1
-  _gravity: -60
-  _downImpulse: 35
-  _maxFallSpeed: -60
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _groundCheckDistance: 5
-  _groundCheckOffset: 0.5
-  _groundCheckOffsetX1: 3
-  _groundCheckOffsetX2: -3
-  _groundCheckOffsetZ1: 1.5
-  _groundCheckOffsetZ2: -1.5
-  _jumpDeadPower: 25
-  _secToDown: 1
-  _secToInvincible: 5
-  _wheels:
-  - {fileID: 1231421422}
-  - {fileID: 1792274200}
-  - {fileID: 1714321385}
-  - {fileID: 97830953}
-  _vState: 0
 --- !u!4 &1784173161
 Transform:
   m_ObjectHideFlags: 0
@@ -4898,7 +4813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e127f4c8e2decef42ba0c0e9ed6ae889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sphereInvincible: {fileID: 876491062}
 --- !u!114 &1784173166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4912,6 +4826,115 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleLanding: {fileID: 626935080}
+--- !u!114 &1784173167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784173158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55d8a0ba8f3ed44180766b18e2cfa33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1784173168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784173158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cde7b2974855546ab79f9bc1a802f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sphereInvincible: {fileID: 876491062}
+  _wheels:
+  - {fileID: 1231421422}
+  - {fileID: 1792274200}
+  - {fileID: 1714321385}
+  - {fileID: 97830953}
+--- !u!114 &1784173169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784173158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4aee84a5c7b16549bcb26abc27a5332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpDeadPower: 25
+  _secToInvincible: 5
+  _startPosition: {x: 0, y: 0, z: 0}
+  _startRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &1784173170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784173158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1058d0e0ccfa4b54da80131007524d27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lineChangeSpeed: 45
+  _lineWidth: 9
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.3396173
+      outSlope: 2.3396173
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22156572
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.039770626
+      outSlope: -0.039770626
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2620405
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.027742783
+      outSlope: -0.027742783
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2038405
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpPower: 8
+  _jumpDuration: 1
+  _gravity: -60
+  _downImpulse: 35
+  _maxFallSpeed: -60
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _groundCheckDistance: 5
+  _groundCheckOffset: 0.5
+  _groundCheckOffsetX1: 3
+  _groundCheckOffsetX2: -3
+  _groundCheckOffsetZ1: 1.5
+  _groundCheckOffsetZ2: -1.5
+  _playerFeetOffset: 3.7
+  _secToDown: 1
 --- !u!1 &1792274199
 GameObject:
   m_ObjectHideFlags: 0
