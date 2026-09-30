@@ -3,50 +3,46 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private bool _isInvincible;
+
     public bool IsInvincible
     {
         get => _isInvincible;
+
         set
         {
             _isInvincible = value;
-            _sphereInvincible.SetActive(value);
+
+            if (_view != null)
+                _view.SetInvincible(value);
         }
     }
 
-    // Оставлены для совместимости с аниматором и контроллером.
-    // IsFlying больше не определяется коллизиями — его ставит PlayerController.
-    public bool IsFlying { get; set; }
     public bool RequestToDown { get; set; }
 
-    private bool _isDown;
-    public bool IsDown
-    {
-        get => _isDown;
-        set
-        {
-            _isDown = value;
-            _animator.SetBool("IsDown", value);
-        }
-    }
+    public bool IsDown { get; private set; }
 
-    [SerializeField] private GameObject _sphereInvincible;
-    private Animator _animator;
-    private PlayerController _playerController;
-    private PlayerParticles _playerParticles;
+    private PlayerMovement _movement;
+    private PlayerView _view;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _playerController = GetComponent<PlayerController>();
-        _playerParticles = GetComponent<PlayerParticles>();
+        _movement = GetComponent<PlayerMovement>();
+        _view = GetComponent<PlayerView>();
     }
 
     public void SetStartStats()
     {
-        IsFlying = false;
-        IsDown = false;
         RequestToDown = false;
+        SetDown(false);
         IsInvincible = false;
+    }
+
+    public void SetDown(bool value)
+    {
+        IsDown = value;
+
+        if (_view != null)
+            _view.SetDown(value);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,24 +50,28 @@ public class PlayerCollision : MonoBehaviour
         if (other.CompareTag("Barrier") && !IsInvincible)
         {
             EventManager.OnLoseGameInvoke();
+            return;
         }
 
         if (other.CompareTag("BarrierDown") && !IsDown && !IsInvincible)
         {
             EventManager.OnLoseGameInvoke();
+            return;
         }
 
         if (other.CompareTag("Crystal"))
         {
             EventManager.OnGetCrystalInvoke();
+
             Destroy(other.gameObject);
+            return;
         }
 
         if (other.CompareTag("JumpSpring") && RequestToDown)
         {
-            _playerController.Jump(1.55f);
-            _playerParticles.OnParticleLanding();
             RequestToDown = false;
+
+            _movement.Jump(1.7f);
         }
     }
 }

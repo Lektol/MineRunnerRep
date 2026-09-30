@@ -71,6 +71,7 @@ public class CanvasManager : MonoBehaviour
     public void ExitToMenu()
     {
         EventManager.OnResetGameInvoke();
+        EventManager.OnTotalLoseInvoke();
     }
 
     private void SetActivePanel(TypePanel panel)

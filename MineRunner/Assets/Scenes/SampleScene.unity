@@ -3194,7 +3194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60adf13aa6908424b8ccea97ab0eca01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roadPrefabsLevel1:
+  _roadPrefabs:
   - {fileID: 5406795157332630854, guid: cdd849bfe3f727d41b2b7627d119859b, type: 3}
   - {fileID: 5406795157332630854, guid: da759ff2e8182634ebd67ea803356b1f, type: 3}
   - {fileID: 5406795157332630854, guid: e49c77a9525b2824fba1d5dc8fbab159, type: 3}
@@ -3207,11 +3207,6 @@ MonoBehaviour:
   - {fileID: 5406795157332630854, guid: 81209e2cf44f30442b642622ddaccf3a, type: 3}
   - {fileID: 5406795157332630854, guid: 22f9c3b02977be147966e0136df591d7, type: 3}
   - {fileID: 5406795157332630854, guid: 78055eff489d23042a6a85ec5649bb4e, type: 3}
-  _roadPrefabsLevel2: []
-  _secToMedium: 100
-  _roadPrefabsLevel3: []
-  _secToHard: 100
-  levelDifficulty: 1
   MaxSpeed: 25
   _maxRoadCount: 10
   _startPose: {x: 0, y: 0, z: 0}
