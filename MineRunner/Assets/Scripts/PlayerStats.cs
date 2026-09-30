@@ -5,15 +5,8 @@ using YG;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
-    public int Crystals
-    {
-        get{ return YG2.saves.Crystals; }
-        private set 
-        { 
-            YG2.saves.Crystals = value; 
-        }
-    }
-
+    private int _crystals = 0;
+    public int Crystals => _crystals;
     public event Action<int> OnCrystalsChanged;
 
     private void Awake()
@@ -41,18 +34,18 @@ public class PlayerStats : MonoBehaviour
 
     private void AddCrystal()
     {
-        Crystals += 1;
-        OnCrystalsChanged?.Invoke(Crystals);
+        _crystals += 1;
+        OnCrystalsChanged?.Invoke(_crystals);
     }
     private void SaveProgressAndSetNull()
     {
-        if(Crystals > YG2.saves.MaxCrystals)
+        if(_crystals > YG2.saves.MaxCrystals)
         {
-            YG2.SetLeaderboard("LeaderBoardSpike", Crystals);
-            YG2.saves.MaxCrystals = Crystals;
+            YG2.SetLeaderboard("LeaderBoardSpike", _crystals);
+            YG2.saves.MaxCrystals = _crystals;
             YG2.SaveProgress();
         }
-        Crystals = 0;
-        OnCrystalsChanged?.Invoke(Crystals);
+        _crystals = 0;
+        OnCrystalsChanged?.Invoke(_crystals);
     }
 }
