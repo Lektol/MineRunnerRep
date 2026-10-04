@@ -807,7 +807,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 744114402}
         m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: SetActivePausePanel
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3741,7 +3741,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1543675701}
   - component: {fileID: 1543675700}
-  - component: {fileID: 1543675702}
   m_Layer: 0
   m_Name: PlayerStats
   m_TagString: Untagged
@@ -3776,18 +3775,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1543675702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543675699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbe24ff2cd316174c9c34e40eee9d0dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1588444012
 GameObject:
   m_ObjectHideFlags: 0

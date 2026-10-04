@@ -26,19 +26,6 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject _rebithPanel;
     private Panel[] _allPanels;
 
-
-    // void OnEnable()
-    // {
-    //     EventManager.OnStartGame += SetActivePlayablePanel;
-    //     EventManager.OnResetGame += SetActiveMenuPanel;
-    // }
-
-    // void OnDisable()
-    // {
-    //     EventManager.OnStartGame -= SetActivePlayablePanel;
-    //     EventManager.OnResetGame -= SetActiveMenuPanel;
-    // }
-
     private void Start()
     {
         _allPanels = new[] {_playablePanel, _menuPanel ,_pausePanel};
@@ -56,20 +43,23 @@ public class CanvasManager : MonoBehaviour
 
     public void SetActiveMenuPanel()
     {
-        Time.timeScale = 1f; 
         SetActivePanel(TypePanel.MenuPanel);
     }
 
     public void SetActivePausePanel()
     {
+        //GameFlow.Instance.Pause();
         SetActivePanel(TypePanel.PausePanel);
-        Time.timeScale = 0f;
+    }
+
+    public void Pause()
+    {
+        GameFlow.Instance.Pause();
     }
 
     public void ComebackToPlay()
     {
-        Time.timeScale = 1f; 
-        SetActivePanel(TypePanel.PlayPanel);
+        GameFlow.Instance.Resume();
     }
 
     public void ExitToMenu()

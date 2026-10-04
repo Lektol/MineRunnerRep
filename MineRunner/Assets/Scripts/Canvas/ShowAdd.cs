@@ -10,14 +10,9 @@ public class ShowAdd : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
     private Coroutine coroutine;
 
-    private void OnEnable()
-    {
-        EventManager.OnTotalLose += ShowAd;
-    }
 
     private void OnDisable()
     {
-        EventManager.OnTotalLose -= ShowAd;
         if(coroutine != null)
         {
             StopCoroutine(coroutine);

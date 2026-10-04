@@ -45,22 +45,6 @@ public class RoadGenerator : MonoBehaviour
         ResetLevel();
     }
 
-    // private void OnEnable()
-    // {
-    //     EventManager.OnStartGame += StartLevel;
-    //     EventManager.OnLoseGame += StopLevel;
-    //     EventManager.OnResetGame += ResetLevel;
-    //     EventManager.OnRebirth += StartLevel;
-    // }
-
-    // private void OnDisable()
-    // {
-    //     EventManager.OnStartGame -= StartLevel;
-    //     EventManager.OnLoseGame -= StopLevel;
-    //     EventManager.OnResetGame -= ResetLevel;
-    //     EventManager.OnRebirth -= StartLevel;
-    // }
-
     private void Update()
     {
         if (_currentSpeed == 0) return;

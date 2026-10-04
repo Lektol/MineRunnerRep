@@ -17,22 +17,6 @@ public class CavesGenerator : MonoBehaviour
         ResetLevel();
     }
 
-    // void OnEnable()
-    // {
-    //     EventManager.OnStartGame += ChangeSpeedToMax;
-    //     EventManager.OnResetGame += ResetLevel;
-    //     EventManager.OnLoseGame += StopLevel;
-    //     EventManager.OnRebirth += ChangeSpeedToMax;
-    // }
-
-    // void OnDisable()
-    // {
-    //     EventManager.OnStartGame -= ChangeSpeedToMax;
-    //     EventManager.OnResetGame -= ResetLevel;
-    //     EventManager.OnLoseGame -= StopLevel;
-    //     EventManager.OnRebirth -= ChangeSpeedToMax;
-    // }
-
     private void Update()
     {
         if(_currentSpeed == 0) return; 

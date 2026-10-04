@@ -19,17 +19,6 @@ public class CameraController : MonoBehaviour
         _targetPos = _menuPos.position;
         _targetRotate = _menuRotation;
     } 
-    // private void OnEnable()
-    // {
-    //     EventManager.OnResetGame += SetMenuPos;
-    //     EventManager.OnStartGame += SetMainPos;
-    // }
-
-    // private void OnDisable()
-    // {
-    //     EventManager.OnResetGame -= SetMenuPos;
-    //     EventManager.OnStartGame -= SetMainPos;
-    // }
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, _targetPos, _cameraSmoothSpeed*Time.deltaTime);

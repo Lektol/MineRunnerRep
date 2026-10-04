@@ -23,13 +23,11 @@ public class PlayerStats : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnGetCrystal += AddCrystal;
-        //EventManager.OnTotalLose += SaveProgressAndSetNull;
     }
 
     private void OnDisable()
     {
         EventManager.OnGetCrystal -= AddCrystal;
-        //EventManager.OnTotalLose -= SaveProgressAndSetNull;
     }
 
     private void AddCrystal()

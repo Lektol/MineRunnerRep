@@ -57,11 +57,10 @@ public class GameFlow : MonoBehaviour
         if (State != GameState.Playing)
             return;
 
-        Time.timeScale = 0f;
-
-        _canvas.SetActiveMenuPanel();
+        _canvas.SetActivePausePanel();
 
         SetState(GameState.Paused);
+        Time.timeScale = 0f;
     }
 
     public void Resume()
@@ -108,9 +107,9 @@ public class GameFlow : MonoBehaviour
 
     public void EndRun()
     {
-        if (State != GameState.Dead &&
-            State != GameState.Playing)
-            return;
+        // if (State != GameState.Dead &&
+        //     State != GameState.Playing)
+        //     return;
 
         Time.timeScale = 1f;
 
