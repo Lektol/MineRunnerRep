@@ -84,7 +84,7 @@ public class PlayerLifeCycle : MonoBehaviour
 
         _collision.IsInvincible = false;
 
-        _movement.ResetMovement(_startPosition);
+        _movement.ResetMovementAndPosition(_startPosition);
 
         _rb.isKinematic = true;
         _rb.useGravity = false;

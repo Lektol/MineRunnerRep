@@ -3,7 +3,7 @@ using System;
 public class EventManager
 {
     public static event Action OnStartGame; 
-    public static event Action OnLoseGame; 
+    public static event Action OnPlayerDied; 
     public static event Action OnResetGame;
     public static event Action OnGetCrystal;
     public static event Action OnRebirth;
@@ -14,9 +14,9 @@ public class EventManager
         OnStartGame?.Invoke();
     }
 
-    public static void OnLoseGameInvoke()
+    public static void OnPlayerDiedInvoke()
     {
-        OnLoseGame?.Invoke();
+        OnPlayerDied?.Invoke();
     }
 
     public static void OnResetGameInvoke()

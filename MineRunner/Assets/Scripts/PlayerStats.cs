@@ -23,13 +23,13 @@ public class PlayerStats : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnGetCrystal += AddCrystal;
-        EventManager.OnTotalLose += SaveProgressAndSetNull;
+        //EventManager.OnTotalLose += SaveProgressAndSetNull;
     }
 
     private void OnDisable()
     {
         EventManager.OnGetCrystal -= AddCrystal;
-        EventManager.OnTotalLose -= SaveProgressAndSetNull;
+        //EventManager.OnTotalLose -= SaveProgressAndSetNull;
     }
 
     private void AddCrystal()
@@ -37,7 +37,7 @@ public class PlayerStats : MonoBehaviour
         _crystals += 1;
         OnCrystalsChanged?.Invoke(_crystals);
     }
-    private void SaveProgressAndSetNull()
+    public void SaveProgressAndSetNull()
     {
         if(_crystals > YG2.saves.MaxCrystals)
         {

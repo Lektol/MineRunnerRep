@@ -9,7 +9,7 @@ public class CanvasManager : MonoBehaviour
     {
         PlayPanel = 1,
         MenuPanel = 2,
-        PausePanel = 3
+        PausePanel = 3,
     }
 
     [Serializable]
@@ -18,22 +18,26 @@ public class CanvasManager : MonoBehaviour
         public TypePanel TypePanel;
         public GameObject ObjPanel;
     }
+    [Header("Главные панели")]
     [SerializeField] private Panel _playablePanel;
     [SerializeField] private Panel _menuPanel; 
     [SerializeField] private Panel _pausePanel;
+    [Header("Панели внутри главных")]
+    [SerializeField] private GameObject _rebithPanel;
     private Panel[] _allPanels;
 
-    void OnEnable()
-    {
-        EventManager.OnStartGame += SetActivePlayablePanel;
-        EventManager.OnResetGame += SetActiveMenuPanel;
-    }
 
-    void OnDisable()
-    {
-        EventManager.OnStartGame -= SetActivePlayablePanel;
-        EventManager.OnResetGame -= SetActiveMenuPanel;
-    }
+    // void OnEnable()
+    // {
+    //     EventManager.OnStartGame += SetActivePlayablePanel;
+    //     EventManager.OnResetGame += SetActiveMenuPanel;
+    // }
+
+    // void OnDisable()
+    // {
+    //     EventManager.OnStartGame -= SetActivePlayablePanel;
+    //     EventManager.OnResetGame -= SetActiveMenuPanel;
+    // }
 
     private void Start()
     {
@@ -42,15 +46,15 @@ public class CanvasManager : MonoBehaviour
 
     public void StartGame()
     {
-        EventManager.OnStartGameInvoke();
+        GameFlow.Instance.StartGame();
     }
 
-    private void SetActivePlayablePanel()
+    public void SetActivePlayablePanel()
     {
         SetActivePanel(TypePanel.PlayPanel);
     }
 
-    private void SetActiveMenuPanel()
+    public void SetActiveMenuPanel()
     {
         Time.timeScale = 1f; 
         SetActivePanel(TypePanel.MenuPanel);
@@ -70,11 +74,15 @@ public class CanvasManager : MonoBehaviour
 
     public void ExitToMenu()
     {
-        EventManager.OnResetGameInvoke();
-        EventManager.OnTotalLoseInvoke();
+        GameFlow.Instance.EndRun();
     }
 
-    private void SetActivePanel(TypePanel panel)
+    public void SetActiveRebithPanel()
+    {
+        _rebithPanel.SetActive(true);
+    }
+
+    public void SetActivePanel(TypePanel panel)
     {
         foreach(var Panel in _allPanels)
         {

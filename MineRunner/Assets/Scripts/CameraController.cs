@@ -14,23 +14,23 @@ public class CameraController : MonoBehaviour
     [SerializeField] private int _smoothSpeed;
     [SerializeField] private float _cameraSmoothSpeed;
 
-    void Start()
+    private void Start()
     {
         _targetPos = _menuPos.position;
         _targetRotate = _menuRotation;
     } 
-    void OnEnable()
-    {
-        EventManager.OnResetGame += SetMenuPos;
-        EventManager.OnStartGame += SetMainPos;
-    }
+    // private void OnEnable()
+    // {
+    //     EventManager.OnResetGame += SetMenuPos;
+    //     EventManager.OnStartGame += SetMainPos;
+    // }
 
-    void OnDisable()
-    {
-        EventManager.OnResetGame -= SetMenuPos;
-        EventManager.OnStartGame -= SetMainPos;
-    }
-    void Update()
+    // private void OnDisable()
+    // {
+    //     EventManager.OnResetGame -= SetMenuPos;
+    //     EventManager.OnStartGame -= SetMainPos;
+    // }
+    private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, _targetPos, _cameraSmoothSpeed*Time.deltaTime);
 
@@ -38,13 +38,13 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _smoothSpeed * Time.deltaTime);
     }
 
-    void SetMainPos()
+    public void SetMainPos()
     {
         _targetPos = _mainPos.position; 
         _targetRotate = _mainRotation;
     }
 
-    void SetMenuPos()
+    public void SetMenuPos()
     {
         _targetPos = _menuPos.position; 
         _targetRotate = _menuRotation;

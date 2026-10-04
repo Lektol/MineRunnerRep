@@ -45,21 +45,21 @@ public class RoadGenerator : MonoBehaviour
         ResetLevel();
     }
 
-    private void OnEnable()
-    {
-        EventManager.OnStartGame += StartLevel;
-        EventManager.OnLoseGame += StopLevel;
-        EventManager.OnResetGame += ResetLevel;
-        EventManager.OnRebirth += StartLevel;
-    }
+    // private void OnEnable()
+    // {
+    //     EventManager.OnStartGame += StartLevel;
+    //     EventManager.OnLoseGame += StopLevel;
+    //     EventManager.OnResetGame += ResetLevel;
+    //     EventManager.OnRebirth += StartLevel;
+    // }
 
-    private void OnDisable()
-    {
-        EventManager.OnStartGame -= StartLevel;
-        EventManager.OnLoseGame -= StopLevel;
-        EventManager.OnResetGame -= ResetLevel;
-        EventManager.OnRebirth -= StartLevel;
-    }
+    // private void OnDisable()
+    // {
+    //     EventManager.OnStartGame -= StartLevel;
+    //     EventManager.OnLoseGame -= StopLevel;
+    //     EventManager.OnResetGame -= ResetLevel;
+    //     EventManager.OnRebirth -= StartLevel;
+    // }
 
     private void Update()
     {
@@ -90,7 +90,7 @@ public class RoadGenerator : MonoBehaviour
         _roads.Add(newRoad);
     }
 
-    private void ResetLevel()
+    public void ResetLevel()
     {
         StopLevel();
         while (_roads.Count > 0)
@@ -111,13 +111,13 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
-    private void StopLevel()
+    public void StopLevel()
     {
         _currentSpeed = 0;
         StopAllCoroutines();
     }
 
-    private void StartLevel()
+    public void StartLevel()
     {
         _currentSpeed = MaxSpeed;
     }

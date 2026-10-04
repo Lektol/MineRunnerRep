@@ -429,7 +429,7 @@ public class PlayerMovement : MonoBehaviour
         _verticalState = VerticalState.Dead;
     }
 
-    public void ResetMovement(Vector3 startPosition)
+    public void ResetMovementAndPosition(Vector3 startPosition)
     {
         StopDown();
 

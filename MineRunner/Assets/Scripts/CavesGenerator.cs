@@ -11,29 +11,29 @@ public class CavesGenerator : MonoBehaviour
     [SerializeField] private float _speedDevider; 
     private float _currentSpeed = 0;
 
-    void Start()
+    private void Start()
     {
         _objectPool = GetComponent<ObjectPool>();
         ResetLevel();
     }
 
-    void OnEnable()
-    {
-        EventManager.OnStartGame += ChangeSpeedToMax;
-        EventManager.OnResetGame += ResetLevel;
-        EventManager.OnLoseGame += StopLevel;
-        EventManager.OnRebirth += ChangeSpeedToMax;
-    }
+    // void OnEnable()
+    // {
+    //     EventManager.OnStartGame += ChangeSpeedToMax;
+    //     EventManager.OnResetGame += ResetLevel;
+    //     EventManager.OnLoseGame += StopLevel;
+    //     EventManager.OnRebirth += ChangeSpeedToMax;
+    // }
 
-    void OnDisable()
-    {
-        EventManager.OnStartGame -= ChangeSpeedToMax;
-        EventManager.OnResetGame -= ResetLevel;
-        EventManager.OnLoseGame -= StopLevel;
-        EventManager.OnRebirth -= ChangeSpeedToMax;
-    }
+    // void OnDisable()
+    // {
+    //     EventManager.OnStartGame -= ChangeSpeedToMax;
+    //     EventManager.OnResetGame -= ResetLevel;
+    //     EventManager.OnLoseGame -= StopLevel;
+    //     EventManager.OnRebirth -= ChangeSpeedToMax;
+    // }
 
-    void Update()
+    private void Update()
     {
         if(_currentSpeed == 0) return; 
 
@@ -49,7 +49,7 @@ public class CavesGenerator : MonoBehaviour
 
     }
 
-    void CreateNewCave()
+    private void CreateNewCave()
     {
         //objectPool.IsHereActiveObj();
         Vector3 pos = _objectPool.IsHereActiveObj() ? _lastCave.transform.position + new Vector3(72,0,0) : _startPose;
@@ -57,19 +57,19 @@ public class CavesGenerator : MonoBehaviour
         _lastCave = newCave;
     }
 
-    void ResetLevel()
+    public void ResetLevel()
     {
         StopLevel();
         _objectPool.DisableAll();
         for(int i = 0; i < _objectPool.PoolSize(); i++) CreateNewCave();
     }
 
-    void StopLevel()
+    public void StopLevel()
     {
         _currentSpeed = 0;
     }
 
-    void ChangeSpeedToMax()
+    public void SetGameSpeed()
     {
         _currentSpeed = RoadGenerator.Instance.MaxSpeed;
     }

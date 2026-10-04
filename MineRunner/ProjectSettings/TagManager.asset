@@ -9,6 +9,7 @@ TagManager:
   - BarrierDown
   - Crystal
   - JumpSpring
+  - FallingDeadZone
   layers:
   - Default
   - TransparentFX

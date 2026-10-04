@@ -1157,6 +1157,59 @@ MonoBehaviour:
   processTranslateLabel: 3/3 completed
   componentTextField: 1
   countLang: 3
+--- !u!1 &435102159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435102161}
+  - component: {fileID: 435102160}
+  m_Layer: 0
+  m_Name: FallingDeadZone
+  m_TagString: FallingDeadZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &435102160
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435102159}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 1, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &435102161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435102159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &552422570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,7 +1611,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 744114404}
+      - m_Target: {fileID: 2036158936}
         m_TargetAssemblyTypeName: RebirthPanel, Assembly-CSharp
         m_MethodName: RefuseRebirth
         m_Mode: 1
@@ -1623,7 +1676,6 @@ GameObject:
   - component: {fileID: 744114401}
   - component: {fileID: 744114402}
   - component: {fileID: 744114403}
-  - component: {fileID: 744114404}
   - component: {fileID: 744114405}
   - component: {fileID: 744114406}
   m_Layer: 5
@@ -1754,6 +1806,7 @@ MonoBehaviour:
   _pausePanel:
     TypePanel: 3
     ObjPanel: {fileID: 1418024055}
+  _rebithPanel: {fileID: 2036158932}
 --- !u!114 &744114403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,22 +1820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1161358538}
---- !u!114 &744114404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744114396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2afdc631c2f053c428a6e77d4dc7b8bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rebPanel: {fileID: 2036158932}
-  _pauseButton: {fileID: 296935422}
-  _textSec: {fileID: 46255714}
-  _secToOffer: 5
 --- !u!114 &744114405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3358,6 +3395,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281431109}
   m_CullTransparentMesh: 1
+--- !u!1 &1314165042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314165044}
+  - component: {fileID: 1314165043}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1314165043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314165042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840d898cd1ed7a640bb1af73ea477118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerLifeCycle: {fileID: 1784173169}
+  _road: {fileID: 1279007835}
+  _caves: {fileID: 1057627216}
+  _canvas: {fileID: 744114402}
+  _camera: {fileID: 963194229}
+  _playerStats: {fileID: 1543675700}
+--- !u!4 &1314165044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314165042}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1418024055
 GameObject:
   m_ObjectHideFlags: 0
@@ -4161,7 +4248,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 744114404}
+      - m_Target: {fileID: 2036158936}
         m_TargetAssemblyTypeName: RebirthPanel, Assembly-CSharp
         m_MethodName: GetOffer
         m_Mode: 1
@@ -5345,6 +5432,7 @@ GameObject:
   - component: {fileID: 2036158933}
   - component: {fileID: 2036158935}
   - component: {fileID: 2036158934}
+  - component: {fileID: 2036158936}
   m_Layer: 5
   m_Name: RebirthPanel
   m_TagString: Untagged
@@ -5412,6 +5500,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036158932}
   m_CullTransparentMesh: 1
+--- !u!114 &2036158936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036158932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afdc631c2f053c428a6e77d4dc7b8bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 296935422}
+  _textSec: {fileID: 46255714}
+  _secToOffer: 5
 --- !u!1 &2105654440
 GameObject:
   m_ObjectHideFlags: 0
@@ -7703,3 +7806,5 @@ SceneRoots:
   - {fileID: 1784173161}
   - {fileID: 2105654443}
   - {fileID: 690655173}
+  - {fileID: 435102161}
+  - {fileID: 1314165044}

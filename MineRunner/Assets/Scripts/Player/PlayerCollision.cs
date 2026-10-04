@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    //[SerializeField] private GameFlow _gameFlow;
     private bool _isInvincible;
-
     public bool IsInvincible
     {
         get => _isInvincible;
@@ -12,8 +12,8 @@ public class PlayerCollision : MonoBehaviour
         {
             _isInvincible = value;
 
-            if (_view != null)
-                _view.SetInvincible(value);
+            if (_playerView != null)
+                _playerView.SetInvincible(value);
         }
     }
 
@@ -21,13 +21,13 @@ public class PlayerCollision : MonoBehaviour
 
     public bool IsDown { get; private set; }
 
-    private PlayerMovement _movement;
-    private PlayerView _view;
+    private PlayerMovement _playerMovement;
+    private PlayerView _playerView;
 
     private void Awake()
     {
-        _movement = GetComponent<PlayerMovement>();
-        _view = GetComponent<PlayerView>();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerView = GetComponent<PlayerView>();
     }
 
     public void SetStartStats()
@@ -41,21 +41,34 @@ public class PlayerCollision : MonoBehaviour
     {
         IsDown = value;
 
-        if (_view != null)
-            _view.SetDown(value);
+        if (_playerView != null)
+            _playerView.SetDown(value);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Barrier") && !IsInvincible)
         {
-            EventManager.OnLoseGameInvoke();
+            EventManager.OnPlayerDiedInvoke();
             return;
         }
 
         if (other.CompareTag("BarrierDown") && !IsDown && !IsInvincible)
         {
-            EventManager.OnLoseGameInvoke();
+            EventManager.OnPlayerDiedInvoke();
+            return;
+        }
+
+        if (other.CompareTag("FallingDeadZone") && !IsInvincible)
+        {
+            EventManager.OnPlayerDiedInvoke();
+            return;
+        }
+
+        if (other.CompareTag("FallingDeadZone") && IsInvincible)
+        {
+            _playerMovement.ResetMovementAndPosition(Vector3.zero);
+            _playerMovement.StartMovement();
             return;
         }
 
@@ -71,7 +84,7 @@ public class PlayerCollision : MonoBehaviour
         {
             RequestToDown = false;
 
-            _movement.Jump(1.7f);
+            _playerMovement.Jump(1.8f);
         }
     }
 }
