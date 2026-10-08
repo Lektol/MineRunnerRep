@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AnimationCurve _animationCurve;
     [SerializeField] private float _jumpPower = 7f;
     [SerializeField] private float _jumpDuration = 1f;
+    [Tooltip("На что умножается сила прыжка при прыжке на пружину")]
+    [SerializeField] private float _jumpMultiplySpring = 1.8f;
+    public float JumpMultiplySpring => _jumpMultiplySpring;
 
     [Header("Gravity")]
     [Tooltip("Отрицательное значение.")]

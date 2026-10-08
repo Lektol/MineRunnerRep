@@ -84,7 +84,8 @@ public class PlayerCollision : MonoBehaviour
         {
             RequestToDown = false;
 
-            _playerMovement.Jump(1.8f);
+            _playerMovement.Jump(_playerMovement.JumpMultiplySpring);
+            other.GetComponent<Animator>().SetTrigger("Jump");
         }
     }
 }
