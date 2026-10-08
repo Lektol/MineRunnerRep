@@ -2,7 +2,14 @@ using UnityEngine;
 
 public class RoadSegment : MonoBehaviour
 {
-    [SerializeField] private float _length = 56f;
+    [SerializeField] private Transform _entry;
+    [SerializeField] private Transform _exit;
 
-    public float Length => _length;
+    public Transform Entry => _entry;
+    public Transform Exit => _exit;
+
+    public void AlignTo(Transform target)
+    {
+        transform.position += target.position - _entry.position;
+    }
 }

@@ -11,6 +11,8 @@ public class RoadGenerator : MonoBehaviour
     public float MaxSpeed = 10;
     private float _currentSpeed = 0;
     [SerializeField] private int _maxRoadCount;
+    [Tooltip("Количество чанков рельс без препядствий в начале")]
+    [SerializeField] private int _countFirstRoads;
     [SerializeField] private Vector3 _startPose;
 
     private void Awake()
@@ -62,14 +64,20 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
-    private void CreateNewRoad(bool setStartRoad = false)
+    private void CreateNewRoad(bool isFirstRoad = false)
     {
-        int index = setStartRoad ? 0 : Random.Range(1, _roadsPools.Length);
-        var roadSegmentLenght = _roadsPools[index].PrefabObj.GetComponent<RoadSegment>().Length;
-        Vector3 pos = _roads.Count > 0 ? _roads[_roads.Count - 1].transform.position + Vector3.right * roadSegmentLenght : _startPose;
+        int index = isFirstRoad ? 0 : Random.Range(1, _roadsPools.Length);
 
-        //GameObject newRoad = Instantiate(_roadPrefabs[index], pos, Quaternion.identity);
-        GameObject newRoad = _roadsPools[index].GetObject(pos, Quaternion.identity);
+        GameObject newRoad = _roadsPools[index].GetObject(Vector3.zero, Quaternion.identity);
+
+        if (_roads.Count > 0)
+        {
+            RoadSegment newSegment = newRoad.GetComponent<RoadSegment>();
+            RoadSegment previousSegment = _roads[_roads.Count - 1].GetComponent<RoadSegment>();
+            newSegment.AlignTo(previousSegment.Exit);
+        }
+
+
         newRoad.transform.SetParent(transform);
         _roads.Add(newRoad);
     }
@@ -84,7 +92,7 @@ public class RoadGenerator : MonoBehaviour
         }
         for (int i = 0; i < _maxRoadCount; i++)
         {
-            if (i < 3)
+            if (i < _countFirstRoads)
             {
                 CreateNewRoad(true);
             }
