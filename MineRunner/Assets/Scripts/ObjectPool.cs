@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
-        InitPool();
+        InitPool(_poolSize);
     }
 
     public void SetPrefab(GameObject gameObjectPref)
@@ -20,16 +20,17 @@ public class ObjectPool : MonoBehaviour
         _prefab = gameObjectPref;
     }
 
-    public void InitPool()
+    public void InitPool(int poolSize)
     {
         if(_prefab == null)
         {
             Debug.LogWarning("На пулл объекта:" + gameObject.name + " нету объекта префаба");
             return;
         }
+        _poolSize = poolSize;
         Pool = new List<GameObject>(_poolSize);
 
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < poolSize; i++)
         {
             CreateNewObject();
         }

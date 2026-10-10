@@ -10,9 +10,12 @@ public class RoadGenerator : MonoBehaviour
     private List<GameObject> _roads = new List<GameObject>();
     public float MaxSpeed = 10;
     private float _currentSpeed = 0;
+    [Tooltip("Максимум заспавненных чанков одновременно")]
     [SerializeField] private int _maxRoadCount;
     [Tooltip("Количество чанков рельс без препядствий в начале")]
     [SerializeField] private int _countFirstRoads;
+    [Tooltip("Количество рельс в каждом пуле")]
+    [SerializeField] private int _maxPoolSize;
     [SerializeField] private Vector3 _startPose;
 
     private void Awake()
@@ -36,7 +39,7 @@ public class RoadGenerator : MonoBehaviour
             ObjectPool pool = poolObject.AddComponent<ObjectPool>();
 
             pool.SetPrefab(_roadPrefabs[i]);
-            pool.InitPool();
+            pool.InitPool(_maxPoolSize);
 
             _roadsPools[i] = pool;
         }

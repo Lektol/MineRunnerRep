@@ -76,7 +76,7 @@ public class PlayerCollision : MonoBehaviour
         {
             EventManager.OnGetCrystalInvoke();
 
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             return;
         }
 

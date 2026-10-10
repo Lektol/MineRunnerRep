@@ -3247,6 +3247,7 @@ MonoBehaviour:
   MaxSpeed: 25
   _maxRoadCount: 10
   _countFirstRoads: 3
+  _maxPoolSize: 3
   _startPose: {x: 0, y: 0, z: 0}
 --- !u!4 &1279007836
 Transform:
