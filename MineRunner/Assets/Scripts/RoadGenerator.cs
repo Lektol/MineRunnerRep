@@ -6,7 +6,8 @@ public class RoadGenerator : MonoBehaviour
 {
     public static RoadGenerator Instance { get; private set; }
     [SerializeField] private GameObject[] _roadPrefabs;
-    private ObjectPool[] _roadsPools;
+    private ObjectPool[] _allRoadsPools;
+    private List<ObjectPool> _roadsPoolsActive;
     private List<GameObject> _roads = new List<GameObject>();
     public float MaxSpeed = 10;
     private float _currentSpeed = 0;
@@ -29,9 +30,10 @@ public class RoadGenerator : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _roadsPools = new ObjectPool[_roadPrefabs.Length];
+        _allRoadsPools = new ObjectPool[_roadPrefabs.Length];
+        _roadsPoolsActive = new List<ObjectPool>();
 
-        for (int i = 0; i < _roadsPools.Length; i++)
+        for (int i = 0; i < _allRoadsPools.Length; i++)
         {
             GameObject poolObject = new GameObject($"RoadPool_{i}");
             poolObject.transform.SetParent(transform);
@@ -41,7 +43,8 @@ public class RoadGenerator : MonoBehaviour
             pool.SetPrefab(_roadPrefabs[i]);
             pool.InitPool(_maxPoolSize);
 
-            _roadsPools[i] = pool;
+            _allRoadsPools[i] = pool;
+            _roadsPoolsActive.Add(pool);
         }
     }
 
@@ -69,20 +72,39 @@ public class RoadGenerator : MonoBehaviour
 
     private void CreateNewRoad(bool isFirstRoad = false)
     {
-        int index = isFirstRoad ? 0 : Random.Range(1, _roadsPools.Length);
+        int index = isFirstRoad ? 0 : Random.Range(0, _roadsPoolsActive.Count - 1);
 
-        GameObject newRoad = _roadsPools[index].GetObject(Vector3.zero, Quaternion.identity);
-
+        _roadsPoolsActive[index].TryGetObject(out GameObject newRoad, Vector3.zero, Quaternion.identity);
         if (_roads.Count > 0)
         {
-            RoadSegment newSegment = newRoad.GetComponent<RoadSegment>();
-            RoadSegment previousSegment = _roads[_roads.Count - 1].GetComponent<RoadSegment>();
-            newSegment.AlignTo(previousSegment.Exit);
+            try
+            {
+                RoadSegment newSegment = newRoad.GetComponent<RoadSegment>();
+                RoadSegment previousSegment = _roads[_roads.Count - 1].GetComponent<RoadSegment>();
+                newSegment.AlignTo(previousSegment.Exit);
+            }
+
+            catch
+            {
+                Debug.LogError(index + " Пустой: " + _roadsPoolsActive[index].IsEmpty());
+            }
         }
-
-
         newRoad.transform.SetParent(transform);
         _roads.Add(newRoad);
+        if (_roadsPoolsActive[index].IsEmpty())
+        {
+            _roadsPoolsActive.RemoveAt(index);
+            UpdatePoolsList();
+        }
+        //GameObject newRoad = _roadsPools[index].GetObject(Vector3.zero, Quaternion.identity);
+    }
+
+    private void UpdatePoolsList()
+    {
+        foreach (var pool in _allRoadsPools)
+        {
+            if (!pool.IsEmpty() && !_roadsPoolsActive.Contains(pool)) _roadsPoolsActive.Add(pool);
+        }
     }
 
     public void ResetLevel()
@@ -93,6 +115,7 @@ public class RoadGenerator : MonoBehaviour
             _roads[0].SetActive(false);
             _roads.RemoveAt(0);
         }
+        UpdatePoolsList();
         for (int i = 0; i < _maxRoadCount; i++)
         {
             if (i < _countFirstRoads)

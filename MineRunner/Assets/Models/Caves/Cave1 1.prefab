@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7511899487038383526}
   - component: {fileID: 70960406002262736}
   - component: {fileID: 1534948901956144510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5197147354575963901}
   - component: {fileID: 4535427526759362985}
   - component: {fileID: 8818832931185709836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6857490821352469437}
   - component: {fileID: 7091301597667002192}
   - component: {fileID: 6820279943658535627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4801422195939488283}
   - component: {fileID: 4958103549013260161}
   - component: {fileID: 5537617920152786754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5808448632637781762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cave1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7717182737589553353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

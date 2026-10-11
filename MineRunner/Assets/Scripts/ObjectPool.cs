@@ -45,27 +45,22 @@ public class ObjectPool : MonoBehaviour
     }
 
 
-    public GameObject GetObject(Vector3 position, Quaternion rotation)
+    public bool TryGetObject(out GameObject obj, Vector3 position, Quaternion rotation)
     {
         for (int i = 0; i < Pool.Count; i++)
         {
             if (!Pool[i].activeInHierarchy)
             {
-                GameObject obj = Pool[i];
+                obj = Pool[i];
                 obj.transform.position = position;
                 obj.transform.rotation = rotation;
                 obj.SetActive(true);
                 //ActiveObjects.Add(obj);
-                return obj;
+                return true;
             }
         }
-
-        GameObject newObj = CreateNewObject();
-        newObj.transform.position = position;
-        newObj.transform.rotation = rotation;
-        newObj.SetActive(true);
-        //ActiveObjects.Add(newObj);
-        return newObj;
+        obj = null;
+        return false;
     }
 
     public void DisableAll()
@@ -76,13 +71,17 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public bool IsHereActiveObj()
+    /// <summary>
+    /// Возвращает true - если всё объекты сейчас активны, т.е. используются пулом и на данный момент он "пуст".Из него нечего достать.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsEmpty()
     {
         foreach (GameObject obj in Pool)
         {
-            if(obj.activeSelf) return true;
+            if(!obj.activeSelf) return false;
         } 
-        return false;
+        return true;
     }
 
     public int PoolSize() => _poolSize;
