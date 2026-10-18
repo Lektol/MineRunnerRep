@@ -107,6 +107,15 @@ public class RoadGenerator : MonoBehaviour
         }
     }
 
+    private void ResetPoolsList()
+    {
+        _roadsPoolsActive.Clear();
+        foreach (var pool in _allRoadsPools)
+        {
+            _roadsPoolsActive.Add(pool);
+        }
+    }
+
     public void ResetLevel()
     {
         StopLevel();
@@ -115,7 +124,7 @@ public class RoadGenerator : MonoBehaviour
             _roads[0].SetActive(false);
             _roads.RemoveAt(0);
         }
-        UpdatePoolsList();
+        ResetPoolsList();
         for (int i = 0; i < _maxRoadCount; i++)
         {
             if (i < _countFirstRoads)
