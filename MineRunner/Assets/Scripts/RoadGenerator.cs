@@ -8,7 +8,7 @@ public class RoadGenerator : MonoBehaviour
     [SerializeField] private GameObject[] _roadPrefabs;
     private ObjectPool[] _allRoadsPools;
     private List<ObjectPool> _roadsPoolsActive;
-    private List<GameObject> _roads = new List<GameObject>();
+    private List<RoadSegment> _roads = new List<RoadSegment>();
     public float MaxSpeed = 10;
     private float _currentSpeed = 0;
     [Tooltip("Максимум заспавненных чанков одновременно")]
@@ -57,14 +57,14 @@ public class RoadGenerator : MonoBehaviour
     {
         if (_currentSpeed == 0) return;
 
-        foreach (GameObject road in _roads)
+        foreach (RoadSegment road in _roads)
         {
             road.transform.position -= new Vector3(_currentSpeed * Time.deltaTime, 0, 0);
         }
 
-        if (_roads[0].transform.position.x < -70)
+        if (_roads[0].transform.position.x < -_roads[0].Length)
         {
-            _roads[0].SetActive(false);
+            _roads[0].gameObject.SetActive(false);
             _roads.RemoveAt(0);
             CreateNewRoad();
         }
@@ -90,7 +90,7 @@ public class RoadGenerator : MonoBehaviour
             }
         }
         newRoad.transform.SetParent(transform);
-        _roads.Add(newRoad);
+        _roads.Add(newRoad.GetComponent<RoadSegment>());
         if (_roadsPoolsActive[index].IsEmpty())
         {
             _roadsPoolsActive.RemoveAt(index);
@@ -121,7 +121,7 @@ public class RoadGenerator : MonoBehaviour
         StopLevel();
         while (_roads.Count > 0)
         {
-            _roads[0].SetActive(false);
+            _roads[0].gameObject.SetActive(false);
             _roads.RemoveAt(0);
         }
         ResetPoolsList();

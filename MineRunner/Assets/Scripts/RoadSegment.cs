@@ -7,6 +7,7 @@ public class RoadSegment : MonoBehaviour
 
     public Transform Entry => _entry;
     public Transform Exit => _exit;
+    public float Length => _exit.position.x - _entry.position.x;
 
     public void AlignTo(Transform target)
     {

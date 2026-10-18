@@ -3244,6 +3244,7 @@ MonoBehaviour:
   - {fileID: 5406795157332630854, guid: 81209e2cf44f30442b642622ddaccf3a, type: 3}
   - {fileID: 5406795157332630854, guid: 22f9c3b02977be147966e0136df591d7, type: 3}
   - {fileID: 5406795157332630854, guid: 78055eff489d23042a6a85ec5649bb4e, type: 3}
+  - {fileID: 5406795157332630854, guid: 691dafd52005e8048880169f0c24e2a9, type: 3}
   MaxSpeed: 25
   _maxRoadCount: 10
   _countFirstRoads: 3
