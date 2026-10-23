@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -21,13 +22,28 @@ public class PlayerCollision : MonoBehaviour
 
     public bool IsDown { get; private set; }
 
+    [Header("Camera Shake")]
+    [SerializeField] private float _duration;
+    [SerializeField] private float _magnitude;
+
     private PlayerMovement _playerMovement;
     private PlayerView _playerView;
+    [SerializeField] private CameraShake _cameraShake;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerView = GetComponent<PlayerView>();
+    }
+
+    private void OnEnable()
+    {
+        _playerMovement.OnDown += ShakeCamera;
+    }
+
+    private void OnDisable()
+    {
+        _playerMovement.OnDown -= ShakeCamera;
     }
 
     public void SetStartStats()
@@ -86,6 +102,11 @@ public class PlayerCollision : MonoBehaviour
 
             _playerMovement.Jump(_playerMovement.JumpMultiplySpring);
             other.GetComponent<Animator>().SetTrigger("Jump");
-        }
+        }        
+    }
+
+    private void ShakeCamera()
+    {
+        _cameraShake.ShakeCamera(_duration, _magnitude);
     }
 }

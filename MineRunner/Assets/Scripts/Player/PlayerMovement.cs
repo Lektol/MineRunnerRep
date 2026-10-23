@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using YG;
@@ -62,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpStartY;
     private float _jumpProgress;
     private float _jumpMultiplier = 1f;
+
+    public event Action OnDown;
 
     private VerticalState _verticalState = VerticalState.Grounded;
 
@@ -243,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
             if (_playerCollision.RequestToDown)
             {
                 _playerCollision.RequestToDown = false;
+                OnDown?.Invoke();
 
                 if (_coroutineDown == null)
                     _coroutineDown = StartCoroutine(Down());
