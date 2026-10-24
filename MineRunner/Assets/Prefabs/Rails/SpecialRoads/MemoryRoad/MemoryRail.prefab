@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: -2234178071987575454}
   - component: {fileID: 954852981056047113}
   m_Layer: 0
-  m_Name: Rails 12
+  m_Name: MemoryRail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
