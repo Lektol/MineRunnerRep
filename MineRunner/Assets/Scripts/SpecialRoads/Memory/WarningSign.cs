@@ -8,17 +8,17 @@ public class WarningSign : MonoBehaviour
     [SerializeField] private GameObject _rightCube;
     [SerializeField] private GameObject _middleCube;
 
-    public void Init(MemoryChank.Direction dir)
+    public void Init(MemoryRoad.Direction dir)
     {
         switch (dir)
         {
-            case MemoryChank.Direction.Left:
+            case MemoryRoad.Direction.Left:
                 _leftCube.SetActive(true);
                 break;
-            case MemoryChank.Direction.Right:
+            case MemoryRoad.Direction.Right:
                 _rightCube.SetActive(true);
                 break;
-            case MemoryChank.Direction.Middle:
+            case MemoryRoad.Direction.Middle:
                 _middleCube.SetActive(true);
                 break;
         }
