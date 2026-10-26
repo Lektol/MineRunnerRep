@@ -28,7 +28,6 @@ public class PlayerCollision : MonoBehaviour
 
     private PlayerMovement _playerMovement;
     private PlayerView _playerView;
-    [SerializeField] private CameraShake _cameraShake;
 
     private void Awake()
     {
@@ -107,6 +106,6 @@ public class PlayerCollision : MonoBehaviour
 
     private void ShakeCamera()
     {
-        _cameraShake.ShakeCamera(_duration, _magnitude);
+        EventManager.RequestCameraShake(_duration, _magnitude);
     }
 }

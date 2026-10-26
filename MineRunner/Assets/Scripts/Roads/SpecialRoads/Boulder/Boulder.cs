@@ -8,7 +8,6 @@ public class Boulder : MonoBehaviour
     private float _verticalVelocity;
     [SerializeField] private float _gravity;
     [SerializeField] private float _maxFallSpeed;
-    public static event Action<float, float> OnBoulderFalled;
     [SerializeField] private float _magnitudeForCameraShake;
     [SerializeField] private float _durationForCameraShake;
     private bool _isFalled;
@@ -48,7 +47,7 @@ public class Boulder : MonoBehaviour
     {
         if(_isFalled) return;
 
-        OnBoulderFalled?.Invoke(_durationForCameraShake, _magnitudeForCameraShake);
+        EventManager.RequestCameraShake(_durationForCameraShake, _magnitudeForCameraShake);
         _isFalled = true;
     }
 }

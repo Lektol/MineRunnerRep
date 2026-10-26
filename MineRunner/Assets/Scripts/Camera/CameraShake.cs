@@ -10,12 +10,12 @@ public class CameraShake : MonoBehaviour
 
     private void OnEnable()
     {
-        Boulder.OnBoulderFalled += ShakeCamera;
+        EventManager.OnCameraShakeRequested += ShakeCamera;
     }
 
     private void OnDisable()
     {
-        Boulder.OnBoulderFalled -= ShakeCamera;
+        EventManager.OnCameraShakeRequested -= ShakeCamera;
         if(_coroutine == null) return;
         StopCoroutine(_coroutine);
         _coroutine = null;
@@ -42,9 +42,13 @@ public class CameraShake : MonoBehaviour
         _coroutine = null;
     }
 
-    public void ShakeCamera(float duration, float magnitude)
+    private void ShakeCamera(float duration, float magnitude)
     {
-        if(_coroutine != null) return;
+        if(_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+            transform.position = _originalPosition;
+        }
         _coroutine = StartCoroutine(Shake(duration, magnitude));
     }
 }
