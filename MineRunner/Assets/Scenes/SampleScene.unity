@@ -3245,20 +3245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roadPrefabs:
-  - {fileID: 5406795157332630854, guid: cdd849bfe3f727d41b2b7627d119859b, type: 3}
-  - {fileID: 5406795157332630854, guid: da759ff2e8182634ebd67ea803356b1f, type: 3}
-  - {fileID: 5406795157332630854, guid: e49c77a9525b2824fba1d5dc8fbab159, type: 3}
-  - {fileID: 5406795157332630854, guid: 31d0c4afc152d954199018882c1f50fd, type: 3}
-  - {fileID: 5406795157332630854, guid: 067448a35964b8049b82d171cc650ced, type: 3}
-  - {fileID: 5406795157332630854, guid: d379407cf25910e4c8010d7f720861ff, type: 3}
-  - {fileID: 5406795157332630854, guid: d0d555543c19bb54db4bb7e925211d74, type: 3}
-  - {fileID: 5406795157332630854, guid: 037e1148213a94d47a07f53c54f8481a, type: 3}
-  - {fileID: 5406795157332630854, guid: 20cdd29eeec263a40b6f794debca73c0, type: 3}
-  - {fileID: 5406795157332630854, guid: 81209e2cf44f30442b642622ddaccf3a, type: 3}
-  - {fileID: 5406795157332630854, guid: 22f9c3b02977be147966e0136df591d7, type: 3}
-  - {fileID: 5406795157332630854, guid: c71f20b445f22274f89eb93901fb03ad, type: 3}
-  - {fileID: 5406795157332630854, guid: c83ae123799de084ebaa46955ee81b67, type: 3}
-  - {fileID: 5406795157332630854, guid: 691dafd52005e8048880169f0c24e2a9, type: 3}
+  - {fileID: 5406795157332630854, guid: c57efef1300bae94d945f2d583e72b6f, type: 3}
   MaxSpeed: 25
   _maxRoadCount: 10
   _countFirstRoads: 3

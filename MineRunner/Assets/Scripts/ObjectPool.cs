@@ -20,7 +20,7 @@ public class ObjectPool : MonoBehaviour
         _prefab = gameObjectPref;
     }
 
-    public void InitPool(int poolSize)
+    public void InitPool(int poolSize = 10)
     {
         if(_prefab == null)
         {

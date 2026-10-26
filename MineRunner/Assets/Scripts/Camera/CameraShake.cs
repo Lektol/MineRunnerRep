@@ -8,12 +8,19 @@ public class CameraShake : MonoBehaviour
     private float _elapsedTime; 
     private Coroutine _coroutine;
 
+    private void OnEnable()
+    {
+        Boulder.OnBoulderFalled += ShakeCamera;
+    }
+
     private void OnDisable()
     {
+        Boulder.OnBoulderFalled -= ShakeCamera;
         if(_coroutine == null) return;
         StopCoroutine(_coroutine);
         _coroutine = null;
     }
+
 
     private IEnumerator Shake(float duration, float magnitude)
     {
