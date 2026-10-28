@@ -47,7 +47,7 @@ public class GameFlow : MonoBehaviour
         _playerLifeCycle.StartGame();
 
         _canvas.SetActivePlayablePanel();
-        _camera.SetMainPos();
+        _camera.SetGameplayMode();
 
         SetState(GameState.Playing);
     }
@@ -85,6 +85,7 @@ public class GameFlow : MonoBehaviour
         _playerLifeCycle.Die();
 
         _canvas.SetActiveRebithPanel();
+        _camera.ChangeLineMode(false);
 
         SetState(GameState.Dead);
     }
@@ -101,6 +102,7 @@ public class GameFlow : MonoBehaviour
         _caves.SetGameSpeed();
 
         _canvas.SetActivePlayablePanel();
+        _camera.ChangeLineMode(true);
 
         SetState(GameState.Playing);
     }
@@ -120,7 +122,7 @@ public class GameFlow : MonoBehaviour
         _caves.ResetLevel();
 
         _canvas.SetActiveMenuPanel();
-        _camera.SetMenuPos();
+        _camera.SetMenuMode();
 
         YG2.InterstitialAdvShow();
 
