@@ -22,8 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpPower = 7f;
     [SerializeField] private float _jumpDuration = 1f;
     [Tooltip("На что умножается сила прыжка при прыжке на пружину")]
-    [SerializeField] private float _jumpMultiplySpring = 1.8f;
-    public float JumpMultiplySpring => _jumpMultiplySpring;
+    [SerializeField] private float _jumpMultiplyForceBySpring = 1.8f;
+    public float JumpMultiplyForceBySpring=> _jumpMultiplyForceBySpring;
+    [Tooltip("На что умножается длительность прыжка при прыжке на пружину")]
+    [SerializeField] private float _jumpMultiplyDurationBySpring = 1.5f;
+    public float JumpMultiplyDurationBySpring => _jumpMultiplyDurationBySpring;
 
     [Header("Gravity")]
     [Tooltip("Отрицательное значение.")]
@@ -62,7 +65,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float _jumpStartY;
     private float _jumpProgress;
-    private float _jumpMultiplier = 1f;
+    private float _curentJumpMultiplierForce = 1f;
+    private float _curentJumpMultiplierDuration = 1f;
+    private const float _baseJumpMultiplierForce = 1f;
+    private const float _baseJumpMultiplierDuration = 1f;
 
     public event Action OnDown;
 
@@ -197,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void TickJump()
     {
-        _jumpProgress += Time.deltaTime / _jumpDuration;
+        _jumpProgress += Time.deltaTime / (_jumpDuration * _curentJumpMultiplierDuration);
 
         if (_jumpProgress >= 1f)
         {
@@ -222,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
             _jumpStartY +
             _animationCurve.Evaluate(_jumpProgress) *
             _jumpPower *
-            _jumpMultiplier;
+            _curentJumpMultiplierForce;
     }
 
     private void TickFall()
@@ -349,7 +355,7 @@ public class PlayerMovement : MonoBehaviour
         return foundGround;
     }
 
-    public void Jump(float multiplier = 1f)
+    public void Jump(float multiplierForce = 1f, float multiplierDuration = 1f)
     {
         if (_verticalState == VerticalState.Dead)
             return;
@@ -361,7 +367,8 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpStartY = _currentY;
         _jumpProgress = 0f;
-        _jumpMultiplier = multiplier;
+        _curentJumpMultiplierForce = multiplierForce;
+        _curentJumpMultiplierDuration = multiplierDuration;
         _verticalVelocity = 0f;
 
         _verticalState = VerticalState.Jumping;
@@ -451,7 +458,8 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpStartY = startPosition.y;
         _jumpProgress = 0f;
-        _jumpMultiplier = 1f;
+        _curentJumpMultiplierForce = _baseJumpMultiplierForce;
+        _curentJumpMultiplierDuration = _baseJumpMultiplierDuration;
 
         _verticalState = VerticalState.Grounded;
 

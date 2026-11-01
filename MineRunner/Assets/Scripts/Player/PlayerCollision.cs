@@ -99,7 +99,7 @@ public class PlayerCollision : MonoBehaviour
         {
             RequestToDown = false;
 
-            _playerMovement.Jump(_playerMovement.JumpMultiplySpring);
+            _playerMovement.Jump(_playerMovement.JumpMultiplyForceBySpring, _playerMovement.JumpMultiplyDurationBySpring);
             other.GetComponent<Animator>().SetTrigger("Jump");
         }        
     }

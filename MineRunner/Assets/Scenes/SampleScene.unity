@@ -1918,7 +1918,7 @@ Transform:
   m_GameObject: {fileID: 761667559}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.61, y: 11.64, z: 0}
+  m_LocalPosition: {x: -7.3, y: 9.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2032,14 +2032,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896928972}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1710646, y: 0.6861027, z: -0.1710646, w: 0.6861027}
-  m_LocalPosition: {x: -11.77, y: 9.31, z: 0}
+  m_LocalRotation: {x: 0.09229593, y: 0.7010574, z: -0.09229593, w: 0.7010574}
+  m_LocalPosition: {x: -7.53, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1484994751}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 28, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 90, z: 0}
 --- !u!114 &896928974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2055,10 +2055,10 @@ MonoBehaviour:
   _menuPos: {fileID: 1978189513}
   _gameplayPos: {fileID: 761667560}
   _menuRotation: {x: 0, y: -21, z: 0}
-  _gameplayRotation: {x: 28, y: 90, z: 0}
+  _gameplayRotation: {x: 15, y: 90, z: 0}
   _smoothSpeed: 3
   _cameraSmoothSpeed: 3
-  _cameraLineChange: {fileID: 1484994752}
+  _cameraFollowPlayer: {fileID: 1484994752}
 --- !u!1001 &937794273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3652,6 +3652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 1784173161}
   _cameraSmoothSpeed: 3
+  _yPositionOffset: 0
   IsGameplay: 1
 --- !u!1 &1510705069
 GameObject:
@@ -4884,8 +4885,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733728884}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4983,8 +4984,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.5, y: 5.12, z: 4}
-  m_Center: {x: -0.04, y: -1.2, z: 0}
+  m_Size: {x: 6.109386, y: 4.773635, z: 4}
+  m_Center: {x: -0.07535434, y: -1.0268178, z: 0}
 --- !u!95 &1784173164
 Animator:
   serializedVersion: 5
@@ -5118,8 +5119,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _jumpPower: 8
-  _jumpDuration: 0.5
-  _jumpMultiplySpring: 1.8
+  _jumpDuration: 0.3
+  _jumpMultiplyForceBySpring: 1.8
+  _jumpMultiplyDurationBySpring: 2
   _gravity: -70
   _downImpulse: 35
   _maxFallSpeed: -60
@@ -7908,8 +7910,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 896928973}
-  - {fileID: 581044468}
   - {fileID: 1733728885}
+  - {fileID: 581044468}
   - {fileID: 1057627217}
   - {fileID: 1279007836}
   - {fileID: 744114400}

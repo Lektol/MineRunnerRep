@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3 _gameplayRotation;
     [SerializeField] private int _smoothSpeed;
     [SerializeField] private float _cameraSmoothSpeed;
-    [SerializeField] private CameraLineChange _cameraLineChange;
+    [SerializeField] private CameraFollowPlayer _cameraFollowPlayer;
 
     private void Start()
     {
@@ -44,6 +44,6 @@ public class CameraController : MonoBehaviour
 
     public void ChangeLineMode(bool isGameplay)
     {
-        _cameraLineChange.IsGameplay = isGameplay;
+        _cameraFollowPlayer.IsGameplay = isGameplay;
     }
 }
