@@ -9,7 +9,7 @@ public class CrystalsSpawner : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float _chanceToSpawn = 0.5f;
 
-    private void Start()
+    private void OnEnable()
     {
         float chance = UnityEngine.Random.Range(0f, 1f);
         if(_chanceToSpawn >= chance)
