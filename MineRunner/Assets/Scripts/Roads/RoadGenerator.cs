@@ -72,7 +72,7 @@ public class RoadGenerator : MonoBehaviour
 
     private void CreateNewRoad(bool isFirstRoad = false)
     {
-        int index = isFirstRoad ? 0 : Random.Range(0, _roadsPoolsActive.Count - 1);
+        int index = isFirstRoad ? 0 : Random.Range(0, _roadsPoolsActive.Count);
 
         _roadsPoolsActive[index].TryGetObject(out GameObject newRoad, Vector3.zero, Quaternion.identity);
         if (_roads.Count > 0)

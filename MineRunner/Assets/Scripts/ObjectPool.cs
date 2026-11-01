@@ -12,6 +12,7 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
+        if(_prefab == null) return;
         InitPool(_poolSize);
     }
 

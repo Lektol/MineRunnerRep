@@ -17,10 +17,13 @@ public class MemoryRoad : MonoBehaviour
     [SerializeField] private WarningSign[] _warningSighs;
 
     [Header("Препятствия")]
-
     [SerializeField] private GameObject _barrierFakeLeftPrefab;
     [SerializeField] private GameObject _barrierFakeMiddlePrefab;
     [SerializeField] private GameObject _barrierFakeRightPrefab;
+    private ObjectPool _poolBarrierFakeLeft;
+    private ObjectPool _poolBarrierFakeMiddle;
+    private ObjectPool _poolBarrierFakeRight;
+    private ObjectPool[] _poolsBarriers;
     /// <summary>
     /// 3 пустышек в заранее подготовленных позициях для барьера, чтобы не задавать координаты вручную
     /// </summary>
@@ -32,6 +35,25 @@ public class MemoryRoad : MonoBehaviour
     {
         _directions = new Direction[3];
         _barriers = new GameObject[3];
+        _poolBarrierFakeLeft = gameObject.AddComponent<ObjectPool>();
+        _poolBarrierFakeRight = gameObject.AddComponent<ObjectPool>();
+        _poolBarrierFakeMiddle = gameObject.AddComponent<ObjectPool>();
+
+        _poolsBarriers = new ObjectPool[]
+        {
+        _poolBarrierFakeLeft,
+        _poolBarrierFakeRight,
+        _poolBarrierFakeMiddle
+        };
+
+        _poolBarrierFakeLeft.SetPrefab(_barrierFakeLeftPrefab);
+        _poolBarrierFakeRight.SetPrefab(_barrierFakeRightPrefab);
+        _poolBarrierFakeMiddle.SetPrefab(_barrierFakeMiddlePrefab);
+
+        foreach (var pool in _poolsBarriers)
+        {
+            pool.InitPool(3);
+        }
     }
 
     private void OnEnable()
@@ -61,13 +83,19 @@ public class MemoryRoad : MonoBehaviour
             switch (_directions[i])
             {
                 case Direction.Left:
-                    _barriers[i] = Instantiate(_barrierFakeLeftPrefab, _parentsForBarriers[i].transform);
+                    _poolBarrierFakeLeft.TryGetObject(out _barriers[i], _parentsForBarriers[i].transform.position, Quaternion.identity);
+                    _barriers[i].transform.SetParent(_parentsForBarriers[i].transform);
+                    //_barriers[i] = Instantiate(_barrierFakeLeftPrefab, _parentsForBarriers[i].transform);
                     break;
                 case Direction.Right:
-                    _barriers[i] = Instantiate(_barrierFakeRightPrefab, _parentsForBarriers[i].transform);
+                    _poolBarrierFakeRight.TryGetObject(out _barriers[i], _parentsForBarriers[i].transform.position, Quaternion.identity);
+                    _barriers[i].transform.SetParent(_parentsForBarriers[i].transform);
+                    //_barriers[i] = Instantiate(_barrierFakeRightPrefab, _parentsForBarriers[i].transform);
                     break;
                 case Direction.Middle:
-                    _barriers[i] = Instantiate(_barrierFakeMiddlePrefab, _parentsForBarriers[i].transform);
+                    _poolBarrierFakeMiddle.TryGetObject(out _barriers[i], _parentsForBarriers[i].transform.position, Quaternion.identity);
+                    _barriers[i].transform.SetParent(_parentsForBarriers[i].transform);
+                    //_barriers[i] = Instantiate(_barrierFakeMiddlePrefab, _parentsForBarriers[i].transform);
                     break;
             }
             _barriers[i].transform.localPosition = Vector3.zero;
@@ -88,7 +116,8 @@ public class MemoryRoad : MonoBehaviour
         {
             if (_barriers[i] != null)
             {
-                Destroy(_barriers[i]);
+                _barriers[i].SetActive(false);
+                //Destroy(_barriers[i]);
                 _barriers[i] = null;
             }
         }
