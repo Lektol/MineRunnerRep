@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7334511403587022311
 Transform:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.25
+      value: -6.0599995
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -496,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.25
+      value: -6.06
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -657,6 +661,10 @@ PrefabInstance:
     - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_Name
       value: Crystal (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,6 +790,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -810,7 +822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -844,6 +856,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -864,7 +880,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.3
+      value: -15.89
       objectReference: {fileID: 0}
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -905,6 +921,10 @@ PrefabInstance:
     - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_Name
       value: Crystal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -988,11 +1008,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 16.7
       objectReference: {fileID: 0}
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: 2.23
       objectReference: {fileID: 0}
     - target: {fileID: 3888799897718440248, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1030,6 +1050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crystal (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 9111045023099928608, guid: ac133956cd2264b4fa6718a3050905a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1054,7 +1078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.25
+      value: -6.0599995
       objectReference: {fileID: 0}
     - target: {fileID: 8636360794379871873, guid: 29dd67b89967b1a4e80fe5d06a12d4bf, type: 3}
       propertyPath: m_LocalPosition.y
