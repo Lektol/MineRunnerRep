@@ -5120,7 +5120,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _jumpPower: 16
-  _jumpDuration: 0.6
+  _jumpDuration: 0.75
   _jumpMultiplyForceBySpring: 1.8
   _jumpMultiplyDurationBySpring: 2
   _gravity: -70
