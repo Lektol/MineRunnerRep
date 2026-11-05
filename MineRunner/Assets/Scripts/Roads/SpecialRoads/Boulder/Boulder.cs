@@ -20,8 +20,10 @@ public class Boulder : MonoBehaviour
         _verticalVelocity = 0;
         _isFalled = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
+        if(_isFalled) return;
+
         Vector3 direction = Vector3.down;
         bool hit = Physics.Raycast(transform.position, direction, out RaycastHit hitInfo, _maxDistance, _groundMask);
         Debug.DrawRay(
@@ -35,12 +37,12 @@ public class Boulder : MonoBehaviour
             ChangeStateToFalled();
             return;
         }
-        _verticalVelocity += _gravity * Time.deltaTime;
+        _verticalVelocity += _gravity * Time.fixedDeltaTime;
 
         if (_verticalVelocity < _maxFallSpeed)
             _verticalVelocity = _maxFallSpeed;
 
-        transform.position += new Vector3(0,_verticalVelocity * Time.deltaTime, 0);
+        transform.position += new Vector3(0,_verticalVelocity * Time.fixedDeltaTime, 0);
     }
 
     private void ChangeStateToFalled()
