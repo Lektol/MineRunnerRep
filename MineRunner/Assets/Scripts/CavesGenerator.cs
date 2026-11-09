@@ -36,7 +36,7 @@ public class CavesGenerator : MonoBehaviour
     private void CreateNewCave()
     {
         //objectPool.IsHereActiveObj();
-        Vector3 pos = _lastCave != null ? _lastCave.transform.position + new Vector3(72,0,0) : _startPose;
+        Vector3 pos = _lastCave != null ? _lastCave.transform.position + new Vector3(70,0,0) : _startPose;
         _objectPool.TryGetObject(out GameObject newCave, pos, Quaternion.identity);
         _lastCave = newCave;
     }
