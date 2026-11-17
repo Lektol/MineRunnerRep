@@ -7,10 +7,12 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _menuPos;
     [SerializeField] private Transform _gameplayPos;
+    [SerializeField] private Transform _skinsShopPos;
     private Vector3 _targetPos;
     private Vector3 _targetRotate;
     [SerializeField] private Vector3 _menuRotation;
     [SerializeField] private Vector3 _gameplayRotation;
+    [SerializeField] private Vector3 _skinsShopRotation;
     [SerializeField] private int _smoothSpeed;
     [SerializeField] private float _cameraSmoothSpeed;
     [SerializeField] private CameraFollowPlayer _cameraFollowPlayer;
@@ -39,6 +41,13 @@ public class CameraController : MonoBehaviour
     {
         _targetPos = _menuPos.position; 
         _targetRotate = _menuRotation;
+        ChangeLineMode(false);
+    }
+
+    public void SetSkinsShopMode()
+    {
+        _targetPos = _skinsShopPos.position; 
+        _targetRotate = _skinsShopRotation;
         ChangeLineMode(false);
     }
 

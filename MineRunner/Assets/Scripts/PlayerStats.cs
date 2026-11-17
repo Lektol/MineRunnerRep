@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 using YG;
 
 public class PlayerStats : MonoBehaviour
@@ -7,6 +8,9 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance { get; private set; }
     private int _crystals = 0;
     public int Crystals => _crystals;
+    private int _crystalsBalance = 0;
+    public int CrystalsBalance => _crystalsBalance;
+    public List<string> OwnedSkins = new();
     public event Action<int> OnCrystalsChanged;
 
     private void Awake()
@@ -18,6 +22,13 @@ public class PlayerStats : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        _crystalsBalance = YG2.saves.BalanceCrystals;
+        OwnedSkins = YG2.saves.OwnedSkins;
     }
 
     private void OnEnable()
@@ -43,7 +54,9 @@ public class PlayerStats : MonoBehaviour
             YG2.saves.MaxCrystals = _crystals;
             YG2.SaveProgress();
         }
+        YG2.saves.BalanceCrystals += _crystals;
         _crystals = 0;
+        YG2.SaveProgress();
         OnCrystalsChanged?.Invoke(_crystals);
     }
 }

@@ -7,7 +7,11 @@
         false,
         false
     ],
-    "idSave": 18,
-    "Crystals": 672,
-    "MaxCrystals": 672
+    "idSave": 19,
+    "MaxCrystals": 672,
+    "BalanceCrystals": 46,
+    "OwnedSkins": [
+        "spike"
+    ],
+    "EquippedSkinId": ""
 }
