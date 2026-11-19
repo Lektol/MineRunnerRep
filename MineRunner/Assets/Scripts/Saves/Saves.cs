@@ -7,6 +7,6 @@ namespace YG
         public int MaxCrystals = 0;
         public int BalanceCrystals = 0;
         public List<string> OwnedSkins = new() {"spike"};
-        public string EquippedSkinId;
+        public string EquippedSkinId = "spike";
     }
 }

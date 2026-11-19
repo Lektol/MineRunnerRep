@@ -9,7 +9,7 @@ public class CrystalCountUpdater : MonoBehaviour
     private void Start()
     {
         _playerStatsInstance = PlayerStats.Instance;
-        ChangeCrystalCountText(_playerStatsInstance.Crystals);
+        ChangeCrystalCountText(_playerStatsInstance.CollectedCrystals);
         SubscribeToCrystalChanged();
     }
 

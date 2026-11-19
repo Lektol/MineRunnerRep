@@ -6,11 +6,9 @@ using YG;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance { get; private set; }
-    private int _crystals = 0;
-    public int Crystals => _crystals;
-    private int _crystalsBalance = 0;
-    public int CrystalsBalance => _crystalsBalance;
-    public List<string> OwnedSkins = new();
+
+    public int CollectedCrystals { get; private set; }
+
     public event Action<int> OnCrystalsChanged;
 
     private void Awake()
@@ -20,15 +18,9 @@ public class PlayerStats : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        _crystalsBalance = YG2.saves.BalanceCrystals;
-        OwnedSkins = YG2.saves.OwnedSkins;
     }
 
     private void OnEnable()
@@ -43,20 +35,27 @@ public class PlayerStats : MonoBehaviour
 
     private void AddCrystal()
     {
-        _crystals += 1;
-        OnCrystalsChanged?.Invoke(_crystals);
+        CollectedCrystals++;
+        OnCrystalsChanged?.Invoke(CollectedCrystals);
     }
+
+    public void ResetRunStats()
+    {
+        CollectedCrystals = 0;
+        OnCrystalsChanged?.Invoke(CollectedCrystals);
+    }
+
     public void SaveProgressAndSetNull()
     {
-        if(_crystals > YG2.saves.MaxCrystals)
+        if(CollectedCrystals > YG2.saves.MaxCrystals)
         {
-            YG2.SetLeaderboard("LeaderBoardSpike", _crystals);
-            YG2.saves.MaxCrystals = _crystals;
+            YG2.SetLeaderboard("LeaderBoardSpike", CollectedCrystals);
+            YG2.saves.MaxCrystals = CollectedCrystals;
             YG2.SaveProgress();
         }
-        YG2.saves.BalanceCrystals += _crystals;
-        _crystals = 0;
+        YG2.saves.BalanceCrystals += CollectedCrystals;
+        CollectedCrystals = 0;
         YG2.SaveProgress();
-        OnCrystalsChanged?.Invoke(_crystals);
+        OnCrystalsChanged?.Invoke(CollectedCrystals);
     }
 }
