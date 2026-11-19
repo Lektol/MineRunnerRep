@@ -50,9 +50,15 @@ public class SkinShopService : MonoBehaviour
         int balance = YG2.saves.BalanceCrystals;
         int cost = skin.Price;
         if(cost > balance) return false;
-        YG2.saves.BalanceCrystals -= cost;
-        UnlockSkin(skin);
-        return true;
+        if(TryToUnlockSkin(skin))
+        {
+            YG2.saves.BalanceCrystals -= cost;    
+            return true;
+        }
+        else
+        {
+            return false;
+        }     
     }
 
     private void PurchaseWithAd()
@@ -63,13 +69,14 @@ public class SkinShopService : MonoBehaviour
     {
     }
 
-    private void UnlockSkin(SkinDefinition skin)
+    private bool TryToUnlockSkin(SkinDefinition skin)
     {
         if (IsOwned(skin.Id))
-            return;
+            return false;
 
         YG2.saves.OwnedSkins.Add(skin.Id);
         YG2.SaveProgress();
+        return true;
     }
 
     public bool Equip(string skinId)
