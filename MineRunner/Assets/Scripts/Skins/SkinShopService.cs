@@ -6,41 +6,50 @@ using YG;
 public class SkinShopService : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private SkinCatalog _catalog;
+    [SerializeField] private SkinCatalog _skinCatalog;
     [SerializeField] private PlayerSkinView _playerSkinView;
-
-    // [Header("Purchase providers")]
-    // [SerializeField] private CurrencyWallet _currencyWallet;
-    // [SerializeField] private RewardedAdProvider _rewardedAdProvider;
-    // [SerializeField] private RealMoneyPurchaseProvider _purchaseProvider;
-
-    [Header("Settings")]
-    [SerializeField] private string _defaultSkinId = "spike";
-
-
-    private readonly HashSet<string> _pendingPurchases = new();
-
-    public event Action OnShopChanged;
+    [SerializeField] private ShopUIScrollBar _shopUIScrollBar;
+    [SerializeField] private SkinInfoUI _skinInfoUI;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _audioClipSuccess;
+    [SerializeField] private AudioClip _audioClipFailure;
 
     private void Start()
     {
         LoadProgress();
-        RestoreRealMoneyPurchases();
     }
 
     private void LoadProgress()
     {
         _playerSkinView.Initialize(YG2.saves.EquippedSkinId);
+        _skinCatalog.TryGetSkin(YG2.saves.EquippedSkinId, out SkinDefinition skin);
+        _skinInfoUI.UpdateInfo(skin);
     }
 
-    public bool IsOwned(string skinId)
+    public void TakeSkinButton()
     {
-        return YG2.saves.OwnedSkins.Contains(skinId);
+        if(_shopUIScrollBar.PreviewSkinId == YG2.saves.EquippedSkinId) return;
+        if(_skinCatalog.IsOwned(_shopUIScrollBar.PreviewSkinId))
+        {
+            Equip(_shopUIScrollBar.PreviewSkinId);
+            return;
+        }
+        
+
+        if(TryToPurchase(_shopUIScrollBar.PreviewSkinId))
+        {
+            _skinCatalog.TryGetSkin(_shopUIScrollBar.PreviewSkinId, out SkinDefinition skin);
+            EventManager.ShopChanged(skin);
+        }
+        else
+        {
+            Debug.Log("Noooo");
+        }
     }
 
-    public bool Purchase(string skinId)
+    private bool TryToPurchase(string skinId)
     {
-        if(!_catalog.TryGetSkin(skinId, out SkinDefinition skin)) return false;
+        if(!_skinCatalog.TryGetSkin(skinId, out SkinDefinition skin)) return false;
         if(skin.UnlockType == SkinUnlockType.Crystals) return PurchaseWithCrystals(skin);
         return true;
     }
@@ -71,7 +80,7 @@ public class SkinShopService : MonoBehaviour
 
     private bool TryToUnlockSkin(SkinDefinition skin)
     {
-        if (IsOwned(skin.Id))
+        if (_skinCatalog.IsOwned(skin.Id))
             return false;
 
         YG2.saves.OwnedSkins.Add(skin.Id);
@@ -81,21 +90,18 @@ public class SkinShopService : MonoBehaviour
 
     public bool Equip(string skinId)
     {
-        if (!IsOwned(skinId))
+        if (!_skinCatalog.IsOwned(skinId))
             return false;
 
-        if (!_catalog.TryGetSkin(skinId, out _))
+        if (!_skinCatalog.TryGetSkin(skinId, out SkinDefinition skin))
             return false;
 
-        if (!_playerSkinView.ApplySkin(skinId))
+        if (!_playerSkinView.TryToApplySkin(skinId))
             return false;
 
         YG2.saves.EquippedSkinId = skinId;
         YG2.SaveProgress();
+        _skinInfoUI.UpdateInfo(skin);
         return true;
-    }
-
-    private void RestoreRealMoneyPurchases()
-    {
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class SkinCatalog : MonoBehaviour
 {
@@ -43,5 +44,10 @@ public class SkinCatalog : MonoBehaviour
     public bool TryGetSkin(string id, out SkinDefinition skin)
     {
         return _skins.TryGetValue(id, out skin);
+    }
+
+    public bool IsOwned(string skinId)
+    {
+        return YG2.saves.OwnedSkins.Contains(skinId);
     }
 }

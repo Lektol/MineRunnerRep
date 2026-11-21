@@ -14,6 +14,15 @@ public class SkinInfoUI : MonoBehaviour
     [SerializeField] private GameObject _crystalIcon;
     private bool _langIsRu = false;
 
+    private void OnEnable()
+    {
+        EventManager.OnShopChanged += UpdateInfo;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnShopChanged -= UpdateInfo;
+    }
 
     private void Start()
     {
@@ -24,7 +33,7 @@ public class SkinInfoUI : MonoBehaviour
     {
         foreach(var skin in skinCards)
         {
-            skin.OnCardPointed += UpdateInfo;
+            skin.OnSelected += UpdateInfo;
         }
     }
 
@@ -49,13 +58,13 @@ public class SkinInfoUI : MonoBehaviour
             string PutTextEn = "";
             if(skin.Id == YG2.saves.EquippedSkinId)
             {
-                PutTextRu = "Надеть";
-                PutTextEn = "Put on";
+                PutTextRu = "Выбран";
+                PutTextEn = "Equipped";
             }
             else
             {
-                PutTextRu = "Надет";
-                PutTextEn = "Worn";
+                PutTextRu = "Выбрать";
+                PutTextEn = "Equip";
             }
             if(_langIsRu) _useButtonText.text = PutTextRu;
             else _useButtonText.text = PutTextEn;

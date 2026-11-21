@@ -7,11 +7,13 @@
         false,
         false
     ],
-    "idSave": 19,
-    "MaxCrystals": 672,
-    "BalanceCrystals": 46,
+    "idSave": 29,
+    "MaxCrystals": 15,
+    "BalanceCrystals": 95000,
     "OwnedSkins": [
-        "spike"
+        "spike",
+        "zahur",
+        "verity"
     ],
-    "EquippedSkinId": ""
+    "EquippedSkinId": "zahur"
 }
