@@ -1,17 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using YG;
 
 public class PlayerSkinView : MonoBehaviour
 {
     [SerializeField] private SkinCatalog _skinCatalog;
 
-    public void Initialize(string defaultSkinId)
+    public void Start()
     {
-        foreach (SkinDefinition skin in _skinCatalog.Skins.Values)
-        {
-            skin.gameObject.SetActive(false);
-        }
-        TryToApplySkin(defaultSkinId);
+        TryToApplySkin(YG2.saves.EquippedSkinId);
     }
 
     public void SucscribeOnSkinCards(List<SkinCard> skinCards)

@@ -10,6 +10,7 @@ public class CanvasManager : MonoBehaviour
         PlayPanel = 1,
         MenuPanel = 2,
         PausePanel = 3,
+        ShopPanel = 4,
     }
 
     [Serializable]
@@ -22,13 +23,14 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Panel _playablePanel;
     [SerializeField] private Panel _menuPanel; 
     [SerializeField] private Panel _pausePanel;
+    [SerializeField] private Panel _shopPanel;
     [Header("Панели внутри главных")]
     [SerializeField] private GameObject _rebithPanel;
     private Panel[] _allPanels;
 
     private void Start()
     {
-        _allPanels = new[] {_playablePanel, _menuPanel ,_pausePanel};
+        _allPanels = new[] {_playablePanel, _menuPanel ,_pausePanel, _shopPanel};
     }
 
     public void StartGame()
@@ -50,6 +52,12 @@ public class CanvasManager : MonoBehaviour
     {
         //GameFlow.Instance.Pause();
         SetActivePanel(TypePanel.PausePanel);
+    }
+
+    public void SetActiveShopPanel()
+    {
+        //GameFlow.Instance.Pause();
+        SetActivePanel(TypePanel.ShopPanel);
     }
 
     public void Pause()
@@ -77,7 +85,7 @@ public class CanvasManager : MonoBehaviour
         foreach(var Panel in _allPanels)
         {
             if(Panel.ObjPanel == null) continue;
-            Panel.ObjPanel.SetActive(Panel.TypePanel==panel);
+            Panel.ObjPanel.SetActive(Panel.TypePanel == panel);
         }
     }
 }

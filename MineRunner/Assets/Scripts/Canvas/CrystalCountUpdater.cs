@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Счётчик для забега, т.е. для кристаллов, которые собраны во время игры 
+/// </summary>
 public class CrystalCountUpdater : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _crystalCount;

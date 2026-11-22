@@ -6,23 +6,21 @@ using System.Collections;
 public class ShowAdd : MonoBehaviour
 {
     [SerializeField] private GameObject _addPanel;
-    [SerializeField] private TextMeshProUGUI _textSec;
     [SerializeField] private TextMeshProUGUI _text;
-    private Coroutine coroutine;
-
+    private Coroutine _coroutine;
 
     private void OnDisable()
     {
-        if(coroutine != null)
+        if(_coroutine != null)
         {
-            StopCoroutine(coroutine);
-            coroutine = null;
+            StopCoroutine(_coroutine);
+            _coroutine = null;
         }
     }
 
     private void ShowAd()
     {
-        coroutine = StartCoroutine(ShowSuccessPanel());
+        _coroutine = StartCoroutine(ShowSuccessPanel());
     }
 
     private IEnumerator ShowSuccessPanel()
@@ -40,6 +38,6 @@ public class ShowAdd : MonoBehaviour
             YG2.InterstitialAdvShow();
         } 
         _addPanel.SetActive(false);
-        coroutine = null;
+        _coroutine = null;
     }
 }

@@ -6,6 +6,7 @@ public class EventManager
     public static event Action OnGetCrystal;
     public static event Action<float, float> OnCameraShakeRequested;
     public static event Action<SkinDefinition> OnShopChanged; //Скин куплен
+    public static event Action<int> OnBalanceChanged; 
 
     public static void OnPlayerDiedInvoke()
     {
@@ -25,5 +26,10 @@ public class EventManager
     public static void ShopChanged(SkinDefinition skin)
     {
         OnShopChanged?.Invoke(skin);
+    }
+
+    public static void BalanceChanged(int count)
+    {
+        OnBalanceChanged?.Invoke(count);
     }
 }

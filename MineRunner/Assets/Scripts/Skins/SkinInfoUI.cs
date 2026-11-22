@@ -12,21 +12,16 @@ public class SkinInfoUI : MonoBehaviour
     /// </summary>
     [SerializeField] private TextMeshProUGUI _useButtonText;
     [SerializeField] private GameObject _crystalIcon;
-    private bool _langIsRu = false;
 
     private void OnEnable()
     {
+        //UpdateInfo(YG2.saves.EquippedSkinId);
         EventManager.OnShopChanged += UpdateInfo;
     }
 
     private void OnDisable()
     {
         EventManager.OnShopChanged -= UpdateInfo;
-    }
-
-    private void Start()
-    {
-        _langIsRu = YG2.lang == "ru";
     }
 
     public void SucscribeOnSkinCards(List<SkinCard> skinCards)
@@ -45,7 +40,7 @@ public class SkinInfoUI : MonoBehaviour
 
     private void SetName(SkinDefinition skin)
     {
-        if(_langIsRu) _nameText.text = skin.SkinNameRU;
+        if(YG2.lang == "ru") _nameText.text = skin.SkinNameRU;
         else _nameText.text = skin.SkinNameEN;
     }
 
@@ -66,7 +61,7 @@ public class SkinInfoUI : MonoBehaviour
                 PutTextRu = "Выбрать";
                 PutTextEn = "Equip";
             }
-            if(_langIsRu) _useButtonText.text = PutTextRu;
+            if(YG2.lang == "ru") _useButtonText.text = PutTextRu;
             else _useButtonText.text = PutTextEn;
             return;
         }
@@ -78,7 +73,7 @@ public class SkinInfoUI : MonoBehaviour
         }
         else if(skin.UnlockType == SkinUnlockType.RewardedAd)
         {
-            if(_langIsRu) _useButtonText.text = "Реклама";
+            if(YG2.lang == "ru") _useButtonText.text = "Реклама";
             else _useButtonText.text = "Add";
         }
     }

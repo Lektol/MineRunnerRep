@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class ShopUIScrollBar : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class ShopUIScrollBar : MonoBehaviour
     [SerializeField] private PlayerSkinView _playerSkinView;
     private List<SkinCard> _skinCards;
     public string PreviewSkinId { get; private set; }
-    public string EquippedSkinId { get; private set; }
 
 
     private void OnEnable()
@@ -67,5 +67,15 @@ public class ShopUIScrollBar : MonoBehaviour
     {
         PreviewSkinId = skin.Id;
         Debug.Log(PreviewSkinId);
+    }
+
+    public void ApplyEquippedSkin()
+    {
+        string equippesdId = YG2.saves.EquippedSkinId;
+        if(PreviewSkinId != equippesdId)
+        {
+            _playerSkinView.TryToApplySkin(equippesdId);
+            PreviewSkinId = equippesdId;
+        }
     }
 }

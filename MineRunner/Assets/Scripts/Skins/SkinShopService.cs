@@ -14,14 +14,13 @@ public class SkinShopService : MonoBehaviour
     [SerializeField] private AudioClip _audioClipSuccess;
     [SerializeField] private AudioClip _audioClipFailure;
 
-    private void Start()
+    private void OnEnable()
     {
         LoadProgress();
     }
 
     private void LoadProgress()
     {
-        _playerSkinView.Initialize(YG2.saves.EquippedSkinId);
         _skinCatalog.TryGetSkin(YG2.saves.EquippedSkinId, out SkinDefinition skin);
         _skinInfoUI.UpdateInfo(skin);
     }
@@ -61,7 +60,8 @@ public class SkinShopService : MonoBehaviour
         if(cost > balance) return false;
         if(TryToUnlockSkin(skin))
         {
-            YG2.saves.BalanceCrystals -= cost;    
+            YG2.saves.BalanceCrystals -= cost;  
+            EventManager.BalanceChanged(YG2.saves.BalanceCrystals);  
             return true;
         }
         else
