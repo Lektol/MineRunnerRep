@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using YG;
 
@@ -28,7 +29,7 @@ public class SkinShopService : MonoBehaviour
     public void TakeSkinButton()
     {
         if(_shopUIScrollBar.PreviewSkinId == YG2.saves.EquippedSkinId) return;
-        if(_skinCatalog.IsOwned(_shopUIScrollBar.PreviewSkinId))
+        if(IsOwned(_shopUIScrollBar.PreviewSkinId))
         {
             Equip(_shopUIScrollBar.PreviewSkinId);
             return;
@@ -38,7 +39,7 @@ public class SkinShopService : MonoBehaviour
         if(TryToPurchase(_shopUIScrollBar.PreviewSkinId))
         {
             _skinCatalog.TryGetSkin(_shopUIScrollBar.PreviewSkinId, out SkinDefinition skin);
-            EventManager.ShopChanged(skin);
+            EventManager.SkinUnlocked(skin);
         }
         else
         {
@@ -62,6 +63,7 @@ public class SkinShopService : MonoBehaviour
         {
             YG2.saves.BalanceCrystals -= cost;  
             EventManager.BalanceChanged(YG2.saves.BalanceCrystals);  
+            YG2.SaveProgress();
             return true;
         }
         else
@@ -80,17 +82,16 @@ public class SkinShopService : MonoBehaviour
 
     private bool TryToUnlockSkin(SkinDefinition skin)
     {
-        if (_skinCatalog.IsOwned(skin.Id))
+        if (IsOwned(skin.Id))
             return false;
 
         YG2.saves.OwnedSkins.Add(skin.Id);
-        YG2.SaveProgress();
         return true;
     }
 
     public bool Equip(string skinId)
     {
-        if (!_skinCatalog.IsOwned(skinId))
+        if (!IsOwned(skinId))
             return false;
 
         if (!_skinCatalog.TryGetSkin(skinId, out SkinDefinition skin))
@@ -103,5 +104,10 @@ public class SkinShopService : MonoBehaviour
         YG2.SaveProgress();
         _skinInfoUI.UpdateInfo(skin);
         return true;
+    }
+
+    private bool IsOwned(string skinId)
+    {
+        return YG2.saves.OwnedSkins.Contains(skinId);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class BalanceCrystalCanvas : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class BalanceCrystalCanvas : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnBalanceChanged -= ChangeCrystalCountText;
+    }
+
+    private void Start()
+    {
+        ChangeCrystalCountText(YG2.saves.BalanceCrystals);
     }
     private void ChangeCrystalCountText(int count)
     {

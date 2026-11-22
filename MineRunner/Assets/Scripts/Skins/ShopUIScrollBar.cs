@@ -30,6 +30,7 @@ public class ShopUIScrollBar : MonoBehaviour
 
     private void Start()
     {
+        PreviewSkinId = YG2.saves.EquippedSkinId;
         _skinCards = new List<SkinCard>();
         foreach(var skin in _skinCatalog.Skins)
         {
@@ -43,7 +44,7 @@ public class ShopUIScrollBar : MonoBehaviour
     private void CreateSkinCard(SkinDefinition skin)
     {
         SkinCard skinCard = Instantiate(_skinCardPrefab, _contentTransform);
-        skinCard.Init(skin, _skinCatalog.IsOwned(skin.Id));
+        skinCard.Init(skin, YG2.saves.OwnedSkins.Contains(skin.Id));
         _skinCards.Add(skinCard);
     }
 

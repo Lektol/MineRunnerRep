@@ -16,12 +16,12 @@ public class SkinCard : MonoBehaviour
 
     private void OnEnable()
     {
-       EventManager.OnShopChanged += SetLock; 
+       EventManager.OnSkinUnlocked += SetLock; 
     }
 
     private void OnDisable()
     {
-        EventManager.OnShopChanged -= SetLock; 
+        EventManager.OnSkinUnlocked -= SetLock; 
     }
     public void Init(SkinDefinition skin, bool isOwn)
     {

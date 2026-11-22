@@ -45,9 +45,4 @@ public class SkinCatalog : MonoBehaviour
     {
         return _skins.TryGetValue(id, out skin);
     }
-
-    public bool IsOwned(string skinId)
-    {
-        return YG2.saves.OwnedSkins.Contains(skinId);
-    }
 }

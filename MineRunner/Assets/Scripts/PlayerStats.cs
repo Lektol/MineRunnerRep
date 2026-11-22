@@ -36,11 +36,6 @@ public class PlayerStats : MonoBehaviour
         EventManager.OnGetCrystal -= AddCrystal;
     }
 
-    private void Start()
-    {
-        EventManager.BalanceChanged(YG2.saves.BalanceCrystals);
-    }
-
     private void AddCrystal()
     {
         CollectedCrystals++;

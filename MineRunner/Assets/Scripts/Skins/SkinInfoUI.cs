@@ -16,12 +16,12 @@ public class SkinInfoUI : MonoBehaviour
     private void OnEnable()
     {
         //UpdateInfo(YG2.saves.EquippedSkinId);
-        EventManager.OnShopChanged += UpdateInfo;
+        EventManager.OnSkinUnlocked += UpdateInfo;
     }
 
     private void OnDisable()
     {
-        EventManager.OnShopChanged -= UpdateInfo;
+        EventManager.OnSkinUnlocked -= UpdateInfo;
     }
 
     public void SucscribeOnSkinCards(List<SkinCard> skinCards)
