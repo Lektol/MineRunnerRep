@@ -7,14 +7,15 @@
         false,
         false
     ],
-    "idSave": 109,
+    "idSave": 118,
     "MaxCrystals": 54,
-    "BalanceCrystals": 92166,
+    "BalanceCrystals": 91487,
     "OwnedSkins": [
         "spike",
         "zahur",
         "verity",
-        "huggy"
+        "huggy",
+        "pig"
     ],
     "EquippedSkinId": "huggy"
 }
